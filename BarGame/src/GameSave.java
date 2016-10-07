@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class GameSave extends Character implements java.io.Serializable { //try moving implementation of Serializable, including methods, to CharacterClasses super class, and/or try implementing interface in character superclass if issues are met
+public class GameSave extends Character implements java.io.Serializable { //Try moving implementation of Serializable, including methods, to CharacterClasses super class, and/or try implementing interface in character superclass if issues are met
 	
 	private static final long serialVersionUID = 1L;
 	
