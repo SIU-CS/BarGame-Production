@@ -26,6 +26,8 @@ public class GameSave extends Character implements java.io.Serializable { //Try 
 			return ois.readObject();
 		}
 	}
+	//Lots of comments
+	
 /*	FileOutputStream fop = null;
 	File file;
 	
