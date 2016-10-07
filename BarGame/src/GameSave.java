@@ -1,3 +1,10 @@
+/**
+ *  GameSave class
+ *  The purpose of this class is to save game state.
+ * 
+ */
+
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
