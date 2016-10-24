@@ -1,12 +1,16 @@
 package edu.siu.bargame;
 import java.util.Random;
 import java.util.Scanner;
-
 public class Battle extends Inventory{
 
-	protected void battle() {
+	protected static void battle() {
 		Enemy opponent = Enemy.typeOfEnemy("Mercenary");//new Enemy(7, 4, 3, 9);
-		System.out.println("A mercenary challenges you!\nPress 1 to attack.\tPress 2 to use an item.\nPress 3 to run.\n");
+		opponent = new Enemy(7,4,3,9);
+		System.out.println("HP: "+player.getCurHp() + " Attack: "+ player.getStr() + " Defense: "+ player.getDef());
+		
+		System.out.println("A mercenary challenges you!");
+		System.out.println("HP: "+opponent.getHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
+		System.out.println("\nPress 1 to attack.\tPress 2 to use an item.\nPress 3 to run.\n");
 		String battleChoice;
 		Scanner option = new Scanner(System.in);
 		battleChoice = option.next();
@@ -14,13 +18,13 @@ public class Battle extends Inventory{
 		if (battleChoice == "1") {
 			attack(opponent);
 			if (opponent.getHp() <= 0) {
-				hero.setExp(hero.getExp() + opponent.getExpGiven());
+				player.setExp(player.getExp() + opponent.getExpGiven());
 				//gold determined by battle location, specific
-				hero.levelUp();
+				player.levelUp();
 				System.out.println("Player Victory!");
 			}
 			
-			else if (hero.getCurHp() <= 0) {
+			else if (player.getCurHp() <= 0) {
 				System.out.println("Player Loss.");
 				//game reset method
 			}
@@ -52,13 +56,16 @@ public class Battle extends Inventory{
 		}
 	}
 	
-	protected void attack(Enemy opponent) {
-		if (hero.equipBonus().getStr() > opponent.getDef()) {
-			opponent.setHp(hero.getStr() - opponent.getDef() - 1);
+	protected static void attack(Enemy opponent){
+		
+		if (player.getStr() > opponent.getDef()) {
+			opponent.setHp(player.getStr() - opponent.getDef() - 1);
+			System.out.println(opponent.getHp());
 		}
 		
-		if (opponent.getStr() > hero.getDef()) {
-			hero.setCurHp(opponent.getStr() - hero.getDef());
+		if (opponent.getStr() > player.getDef()) {
+			player.setCurHp(opponent.getStr() - player.getDef());
+			System.out.println(player.getCurHp());
 		}
 	}
 }
