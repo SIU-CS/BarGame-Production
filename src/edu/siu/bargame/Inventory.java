@@ -1,4 +1,4 @@
-package Characters;
+package edu.siu.bargame;
 public class Inventory extends Character{
 	String[] battleItems = new String[20];
 	String[] keyItems = new String[6];

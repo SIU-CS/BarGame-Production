@@ -1,4 +1,4 @@
-package Characters;
+package edu.siu.bargame;
 
 import java.util.Scanner;
 

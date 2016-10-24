@@ -1,8 +1,7 @@
-package Battle;
+package edu.siu.bargame;
 import java.util.Random;
 import java.util.Scanner;
-import Characters.Inventory;
-import Enemy.Enemy;
+
 public class Battle extends Inventory{
 
 	protected void battle() {

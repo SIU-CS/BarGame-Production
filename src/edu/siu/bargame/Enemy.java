@@ -1,16 +1,18 @@
-package Enemy;
+package edu.siu.bargame;
 
 public class Enemy {
 	protected int hp;
 	protected int str;
 	protected int def;
 	protected int expGiven;
+	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
 		this.str = str;
 		this.def = def;
 		this.expGiven = expGiven;
 	}
+	
 	public int getExpGiven() {
 		return expGiven;
 	}
