@@ -1,17 +1,60 @@
+package Characters;
+
+import java.util.Scanner;
 
 public class Character {
-	protected int level;
-	protected int exp;
+	protected int level = 1;
+	protected int exp = 0;
 	protected int str;
 	protected int def;
-	protected int hp;
-	protected static String gender;
-	protected static String playerDescription;
-	protected static String name;
-	protected int expForLevelUp;
+	protected int maxHp;
+	protected int curHp = maxHp;
+	protected String gender;
+	protected String playerDescription;
+	protected String name;
+	protected int expForLevelUp = 80;
+	public Character hero;
 	
-	//CONSTRUCTOR
+	public Character() {
+		
+	}
 	
+	public Character(int strength, int defense, int hp) {
+		this.str = strength;
+		this.def = defense;
+		this.maxHp = hp;
+	}
+	
+	public void createCharacter() {
+		hero = new Character(7, 7, 60);
+		System.out.println("Enter your gender.  M or F.");
+		Scanner sex = new Scanner(System.in);
+		String gender = sex.next();
+		if (gender == "M" || gender == "F") {
+			this.gender = gender;
+		}
+		else {
+			System.out.println("Error, try again.");
+		}
+		System.out.println("Briefly Describe yourself.");
+		String description;
+		Scanner playerDescription = new Scanner(System.in);
+		description = playerDescription.next();
+		this.playerDescription = description;
+		System.out.println("Please enter the Hero's name.");
+		Scanner name = new Scanner(System.in);
+		String title = name.next();
+		this.name = title;
+	}
+	
+	public Character getHero() {
+		return hero;
+	}
+
+	public void setHero(Character hero) {
+		this.hero = hero;
+	}
+
 	public int getLevel() {
 		return level;
 	}
@@ -36,11 +79,17 @@ public class Character {
 	public void setDef(int def) {
 		this.def = def;
 	}
-	public int getHp() {
-		return hp;
+	public int getMaxHp() {
+		return maxHp;
 	}
-	public void setHp(int hp) {
-		this.hp = hp;
+	public void setMaxHp(int hp) {
+		this.maxHp = hp;
+	}
+	public void setCurHp(int hp) {
+		this.curHp = hp;
+	}
+	public int getCurHp() {
+		return curHp;
 	}
 	public String getGender() {
 		return gender;
@@ -78,6 +127,6 @@ public class Character {
 		}
 			expForLevelUp *= level;
 		
-	}	
+	}
 	
 }
