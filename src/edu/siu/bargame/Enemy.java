@@ -5,13 +5,14 @@ public class Enemy {
 	protected int str;
 	protected int def;
 	protected int expGiven;
-	
+	Enemy en1;
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
 		this.str = str;
 		this.def = def;
 		this.expGiven = expGiven;
 	}
+	
 	
 	public int getExpGiven() {
 		return expGiven;
@@ -37,7 +38,21 @@ public class Enemy {
 	public void setDef(int def) {
 		this.def = def;
 	}
+	public Enemy createEnemy(){
+		this.en1=typeOfEnemy("Mercenary");
+		return en1;
+	}
 	
+	public Enemy getEn1() {
+		return en1;
+	}
+
+
+	public void setEn1(Enemy en1) {
+		this.en1 = en1;
+	}
+
+
 	public static Enemy typeOfEnemy(String type) {
 		Enemy enemy = null;
 		switch (type) {

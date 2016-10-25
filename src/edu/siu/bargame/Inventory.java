@@ -60,7 +60,7 @@ public class Inventory extends Character{
 		}
 	}
 	
-	public String removeBattleItem(String item) {
+	public static String removeBattleItem(String item) {
 		boolean remove = false;
 		for (int i = 0; i <= battleItems.length - 1; i++) {
 			if (battleItems[i] == item) {
@@ -127,7 +127,7 @@ public class Inventory extends Character{
 	}
 	
 	public static void printBattleItems() {
-		for (int i = 0; i <= battleItems.length; i++) {
+		for (int i = 0; i <= battleItems.length-1; i++) {
 			System.out.println(battleItems[i] + "\n");
 		}
 	}
@@ -148,16 +148,17 @@ public class Inventory extends Character{
 		switch(item) {
 			case "Potion":
 				player.setCurHp(player.getCurHp()+20);
-				System.out.println(player.getCurHp());
+				System.out.println("Current Hp increased by: "+player.getCurHp());
+				removeBattleItem(item);
 				break;
 			//auto use case "Pheonix Down":
 			case "Great Potion":
 				player.setCurHp(player.getCurHp()+60);
-				System.out.println(player.getCurHp());
+				System.out.println("Current Hp increased by: "+player.getCurHp());
 				break;
 			case "Max Potion":
 				player.setCurHp(player.getMaxHp());
-				System.out.println(player.getCurHp());
+				System.out.println("Current Hp increased by: "+player.getCurHp());
 				break;
 			default:
 				System.out.println("Item not found!");
