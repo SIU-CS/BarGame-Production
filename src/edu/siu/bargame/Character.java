@@ -28,7 +28,7 @@ public class Character {
 	}
 	
 	public void createCharacter() {
-		player = new Character(7, 7, 60); // created at initiation
+		//player = new Character(); // created at initiation
 		System.out.println("Enter your gender.  M or F.");
 		Scanner sex = new Scanner(System.in);
 		
@@ -106,6 +106,7 @@ public class Character {
 		this.maxHp = hp;
 	}
 	public void setCurHp(int hp) {
+		
 		this.curHp = hp;
 	}
 	public int getCurHp() {

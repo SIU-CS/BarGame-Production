@@ -1,10 +1,11 @@
 package edu.siu.bargame;
 
-public class Enemy {
+public class Enemy extends Character {
 	protected int hp;
 	protected int str;
 	protected int def;
 	protected int expGiven;
+	private static String typeValue;
 	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
@@ -19,10 +20,12 @@ public class Enemy {
 	public void setExpGiven(int expGiven) {
 		this.expGiven = expGiven;
 	}
-	public int getHp() {
+	public int getCurHp() {
+		if(hp < 0)
+			hp = 0;
 		return hp;
 	}
-	public void setHp(int hp) {
+	public void setCurHp(int hp) {
 		this.hp = hp;
 	}
 	public int getStr() {
@@ -39,6 +42,7 @@ public class Enemy {
 	}
 	
 	public static Enemy typeOfEnemy(String type) {
+		typeValue = type;
 		Enemy enemy = null;
 		switch (type) {
 			case "Soldier":
@@ -75,6 +79,11 @@ public class Enemy {
 				enemy = new Enemy(0, 0, 0, 0);
 		}
 		return enemy;
+	}
+	
+	public String getTypeOfEnemy(){
+		return typeValue;
+		
 	}
 	
 	protected void levelScale() {
