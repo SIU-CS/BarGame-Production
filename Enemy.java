@@ -1,33 +1,64 @@
-package Enemy;
+package edu.siu.bargame;
 
 public class Enemy {
-	int hp, str, def, expGiven;
+	protected int hp;
+	protected int str;
+	protected int def;
+	protected int expGiven;
+	Enemy en1;
+	
+	public Enemy() {
+		
+	}
+	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
 		this.str = str;
 		this.def = def;
 		this.expGiven = expGiven;
 	}
-	protected int getHp() {
+	
+	
+	public int getExpGiven() {
+		return expGiven;
+	}
+	public void setExpGiven(int expGiven) {
+		this.expGiven = expGiven;
+	}
+	public int getHp() {
 		return hp;
 	}
-	protected void setHp(int hp) {
+	public void setHp(int hp) {
 		this.hp = hp;
 	}
-	protected int getStr() {
+	public int getStr() {
 		return str;
 	}
-	protected void setStr(int str) {
+	public void setStr(int str) {
 		this.str = str;
 	}
-	protected int getDef() {
+	public int getDef() {
 		return def;
 	}
-	protected void setDef(int def) {
+	public void setDef(int def) {
 		this.def = def;
 	}
+	public Enemy createEnemy(){
+		this.en1=typeOfEnemy("Mercenary");
+		return en1;
+	}
 	
-	protected Enemy typeOfEnemy(String type) {
+	public Enemy getEn1() {
+		return en1;
+	}
+
+
+	public void setEn1(Enemy en1) {
+		this.en1 = en1;
+	}
+
+
+	public static Enemy typeOfEnemy(String type) {
 		Enemy enemy = null;
 		switch (type) {
 			case "Soldier":
