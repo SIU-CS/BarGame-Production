@@ -1,28 +1,34 @@
-package Enemy;
+package edu.siu.bargame;
 
-public class Enemy {
+public class Enemy extends Character {
 	protected int hp;
 	protected int str;
 	protected int def;
 	protected int expGiven;
+	private static String typeValue;
+	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
 		this.str = str;
 		this.def = def;
 		this.expGiven = expGiven;
 	}
+	
 	public int getExpGiven() {
 		return expGiven;
 	}
 	public void setExpGiven(int expGiven) {
 		this.expGiven = expGiven;
 	}
-	public int getHp() {
+	public int getCurHp() {
+		if(hp < 0)
+			hp = 0;
 		return hp;
 	}
-	public void setHp(int hp) {
+	public void setCurHp(int hp) {
 		this.hp = hp;
 	}
+	@Override
 	public int getStr() {
 		return str;
 	}
@@ -37,6 +43,7 @@ public class Enemy {
 	}
 	
 	public static Enemy typeOfEnemy(String type) {
+		typeValue = type;
 		Enemy enemy = null;
 		switch (type) {
 			case "Soldier":
@@ -57,6 +64,9 @@ public class Enemy {
 			case "Mercenary":
 				enemy = new Enemy(7, 4, 3, 9);
 				break;
+			case "Boss":
+				enemy = new Enemy(20 , 5, 10, 9);
+				break;
 			default:
 				System.out.println("Invalid enemy type entered.");
 				enemy = new Enemy(0, 0, 0, 0);
@@ -73,6 +83,11 @@ public class Enemy {
 				enemy = new Enemy(0, 0, 0, 0);
 		}
 		return enemy;
+	}
+	
+	public String getTypeOfEnemy(){
+		return typeValue;
+		
 	}
 	
 	protected void levelScale() {

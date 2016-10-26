@@ -1,8 +1,8 @@
-package Characters;
+package edu.siu.bargame;
 public class Inventory extends Character{
-	String[] battleItems = new String[20];
+	static String[] battleItems = new String[20];
 	String[] keyItems = new String[6];
-	String[] equipment = new String[5];
+	String[] equipmentItems = new String[5];
 	
 	public void setStartItems() {
 		addBattleItem("Potion");
@@ -34,11 +34,11 @@ public class Inventory extends Character{
 	}
 
 	protected String[] getEquipment() {
-		return equipment;
+		return equipmentItems;
 	}
 
 	protected void setEquipment(String[] equipment) {
-		this.equipment = equipment;
+		this.equipmentItems = equipment;
 	}
 
 	public String addBattleItem(String item) {
@@ -91,9 +91,9 @@ public class Inventory extends Character{
 	
 	public String addEquipment(String item) {
 		boolean added = false;
-		for (int i = 0; i <= equipment.length - 1; i++) {
-			if (equipment[i] == null) {
-				equipment[i] = item;
+		for (int i = 0; i <= equipmentItems.length - 1; i++) {
+			if (equipmentItems[i] == null) {
+				equipmentItems[i] = item;
 				added = true;
 				break;
 			}
@@ -110,9 +110,9 @@ public class Inventory extends Character{
 	
 	public String removeEquipment(String item) {
 		boolean remove = false;
-		for (int i = 0; i <= equipment.length - 1; i++) {
-			if (equipment[i] == item) {
-				equipment[i] = null;
+		for (int i = 0; i <= equipmentItems.length - 1; i++) {
+			if (equipmentItems[i] == item) {
+				equipmentItems[i] = null;
 				remove = true;
 				break;
 			}
@@ -126,38 +126,46 @@ public class Inventory extends Character{
 		}
 	}
 	
-	public void printBattleItems() {
-		for (int i = 0; i <= battleItems.length; i++) {
+	public static void printBattleItems() {
+		for (int i = 0; i <= battleItems.length - 1; i++) {
+			if(battleItems[i] != null)
 			System.out.println(battleItems[i] + "\n");
 		}
 	}
 	
 	public void printKeyItems() {
 		for (int i = 0; i < keyItems.length - 1; i++) {
+			if(keyItems[i] != null)
 			System.out.println(keyItems[i] + "\n");
 		}
 	}
 	
 	public void printEquipment() {
-		for (int i = 0; i <= equipment.length - 1; i++) {
-			System.out.println(equipment[i] + "\n");
+		for (int i = 0; i <= equipmentItems.length - 1; i++) {
+			if(equipmentItems[i] != null)
+			System.out.println(equipmentItems[i] + "\n");
 		}
 	}
 	
-	public void useItem(String item) {
-		switch(item) {
-			case "Potion":
-				hero.setCurHp(hero.getCurHp()+20);
-				System.out.println(hero.getCurHp());
+	public static void useItem(String item) {
+		switch(item.toLowerCase()) {
+			case "potion":
+				player.setCurHp(player.getCurHp()+10);
+				if(player.getCurHp() >= player.getMaxHp()){
+					player.setCurHp(player.getMaxHp());
+				}
+				System.out.println("You drink the potion, you're health is now " + player.getCurHp());
 				break;
 			//auto use case "Pheonix Down":
 			case "Great Potion":
-				hero.setCurHp(hero.getCurHp()+60);
-				System.out.println(hero.getCurHp());
+				player.setCurHp(player.getCurHp()+60);
+				System.out.println(player.getCurHp());
 				break;
 			case "Max Potion":
-				hero.setCurHp(hero.getMaxHp());
-				System.out.println(hero.getCurHp());
+				player.setCurHp(player.getMaxHp());
+				System.out.println(player.getCurHp());
+				break;
+			case "exit":
 				break;
 			default:
 				System.out.println("Item not found!");
@@ -166,67 +174,67 @@ public class Inventory extends Character{
 	
 	public void equipBonus() {
 		//String head, torso, leggings, boots, weapon;//leather, iron, steel, blessed\\wooden, iron, steel, blessed
-		switch (equipment[0]) {
+		switch (equipmentItems[0]) {
 			case "leather":
-				hero.setDef(hero.getDef()+2);
+				player.setDef(player.getDef()+2);
 				break;
 			case "iron":
-				hero.setDef(hero.getDef()+4);
+				player.setDef(player.getDef()+4);
 				break;
 			case "steel":
-				hero.setDef(hero.getDef()+6);
+				player.setDef(player.getDef()+6);
 				break;
 			case "blessed":
-				hero.setDef(hero.getDef()+10);
-				hero.setMaxHp(hero.getMaxHp()+50);
+				player.setDef(player.getDef()+10);
+				player.setMaxHp(player.getMaxHp()+50);
 				break;
 			default:
 		}
-		switch (equipment[1]) {
+		switch (equipmentItems[1]) {
 			case "leather":
-				hero.setDef(hero.getDef()+2);
+				player.setDef(player.getDef()+2);
 				break;
 			case "iron":
-				hero.setDef(hero.getDef()+4);
+				player.setDef(player.getDef()+4);
 				break;
 			case "steel":
-				hero.setDef(hero.getDef()+6);
+				player.setDef(player.getDef()+6);
 				break;
 			case "blessed":
-				hero.setDef(hero.getDef()+10);
-				hero.setMaxHp(hero.getMaxHp()+50);
+				player.setDef(player.getDef()+10);
+				player.setMaxHp(player.getMaxHp()+50);
 				break;
 			default:
 		}
-		switch (equipment[2]) {
+		switch (equipmentItems[2]) {
 			case "leather":
-				hero.setDef(hero.getDef()+2);
+				player.setDef(player.getDef()+2);
 				break;
 			case "iron":
-				hero.setDef(hero.getDef()+4);
+				player.setDef(player.getDef()+4);
 				break;
 			case "steel":
-				hero.setDef(hero.getDef()+2);
+				player.setDef(player.getDef()+2);
 				break;
 			case "blessed":
-				hero.setDef(hero.getDef()+10);
-				hero.setMaxHp(hero.getMaxHp()+50);
+				player.setDef(player.getDef()+10);
+				player.setMaxHp(player.getMaxHp()+50);
 				break;
 			default:
 	}
-		switch (equipment[3]) {
+		switch (equipmentItems[3]) {
 		case "wooden":
-			hero.setStr(hero.getStr()+2);
+			player.setStr(player.getStr()+2);
 			break;
 		case "iron":
-			hero.setStr(hero.getStr()+4);
+			player.setStr(player.getStr()+4);
 			break;
 		case "steel":
-			hero.setStr(hero.getStr()+6);
+			player.setStr(player.getStr()+6);
 			break;
 		case "blessed":
-			hero.setStr(hero.getStr()+10);
-			hero.setDef(hero.getDef()+50);
+			player.setStr(player.getStr()+10);
+			player.setDef(player.getDef()+50);
 			break;
 		default:
 		}

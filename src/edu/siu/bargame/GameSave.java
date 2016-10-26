@@ -1,3 +1,4 @@
+package edu.siu.bargame;
 /**
  *  GameSave class
  *  The purpose of this class is to save game state.
