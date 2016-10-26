@@ -154,7 +154,6 @@ public class Character {
 		int healthDiff;
 		
 		if((healthDiff = opponent.getStr() - player.getDef()) < 0){
-			System.out.println("The attack was weak");
 			return healthDiff = 1;
 		}
 		else 

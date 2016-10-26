@@ -28,6 +28,7 @@ public class Enemy extends Character {
 	public void setCurHp(int hp) {
 		this.hp = hp;
 	}
+	@Override
 	public int getStr() {
 		return str;
 	}
@@ -62,6 +63,9 @@ public class Enemy extends Character {
 				break;
 			case "Mercenary":
 				enemy = new Enemy(7, 4, 3, 9);
+				break;
+			case "Boss":
+				enemy = new Enemy(20 , 5, 10, 9);
 				break;
 			default:
 				System.out.println("Invalid enemy type entered.");
