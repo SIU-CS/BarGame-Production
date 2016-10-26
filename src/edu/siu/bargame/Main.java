@@ -23,6 +23,7 @@ public class Main {
 		
 		Battle.battle("Undead");
 		Battle.battle("Mercenary");
+		Battle.battle("Boss");
 		//Battle.attack(opponent);
 	}
 

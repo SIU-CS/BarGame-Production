@@ -150,8 +150,11 @@ public class Inventory extends Character{
 	public static void useItem(String item) {
 		switch(item.toLowerCase()) {
 			case "potion":
-				player.setCurHp(player.getCurHp()+20);
-				System.out.println(player.getCurHp());
+				player.setCurHp(player.getCurHp()+10);
+				if(player.getCurHp() >= player.getMaxHp()){
+					player.setCurHp(player.getMaxHp());
+				}
+				System.out.println("You drink the potion, you're health is now " + player.getCurHp());
 				break;
 			//auto use case "Pheonix Down":
 			case "Great Potion":
