@@ -15,8 +15,14 @@ public class Main {
 		System.out.println(player.PrintStats());
 		
 		
+		Inventory inventory = new Inventory();
+		inventory.setStartItems();
+	    inventory.printBattleItems();
+	    inventory.printEquipment();
+	    inventory.printKeyItems();
 		
-		Battle.battle("Bandit");
+		Battle.battle("Undead");
+		Battle.battle("Mercenary");
 		//Battle.attack(opponent);
 	}
 

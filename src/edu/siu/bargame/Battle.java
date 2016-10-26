@@ -77,16 +77,22 @@ public class Battle extends Inventory{
 		}
 		
 		else if (battleChoice == 2) {
-			printBattleItems();
-			System.out.println("Enter the name of the item you want to use.  Enter 1 to return to the previous screen.");//method to use item
-			Scanner battleItem = new Scanner(System.in);
-			String item = battleItem.next();
-			useItem(item);
-			battle(enemy);
+			option2(enemy);
 		}
 	}
 		System.out.println("Game over");
 	
+	}
+
+
+
+	private static void option2(String enemy) {
+		printBattleItems();
+		System.out.println("Enter the name of the item you want to use.  Enter exit to return to the previous screen.");//method to use item
+		Scanner battleItem = new Scanner(System.in);
+		String item = battleItem.next();
+		useItem(item);
+		//battle(enemy);
 	}
 	
 	
