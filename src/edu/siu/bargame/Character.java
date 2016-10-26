@@ -149,6 +149,19 @@ public class Character {
 			expForLevelUp *= level;
 		
 	}
+	
+	public int HealthDiff( Character player, Character opponent){
+		int healthDiff;
+		
+		if((healthDiff = opponent.getStr() - player.getDef()) < 0){
+			System.out.println("The attack was weak");
+			return healthDiff = 1;
+		}
+		else 
+			return healthDiff = opponent.getStr()- player.getDef();
+		//player.setCurHp(player.getCurHp() - (opponent.getStr() - player.getDef()));
+	}
+	
 	public String PrintStats(){ // print notable stats
 		return "Attack: " + getStr() + " Defense: "+ getDef() + " HP: " + getCurHp() + "/" + getMaxHp() +
 					" Current Level: " + getLevel();  

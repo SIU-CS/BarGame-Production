@@ -3,14 +3,14 @@ import java.util.Random;
 import java.util.Scanner;
 public class Battle extends Inventory{
 
+	public static String Target;
+	
 	protected static void battle() {
 		//Enemy opponent = new Enemy(7,4,3,9);
 		Enemy opponent = Enemy.typeOfEnemy("Mercenary");//new Enemy(7, 4, 3, 9);
 		
-		System.out.println("HP: "+ player.getCurHp() + " Attack: "+ player.getStr() + " Defense: "+ player.getDef());
-		
-		System.out.println("A mercenary challenges you!");
-		System.out.println("Mercenary's stats: "+" HP: "+ opponent.getCurHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
+		System.out.println("A " + opponent.getTypeOfEnemy() + " challenges you!");
+		System.out.println(opponent.getTypeOfEnemy() +" "+" HP: "+ opponent.getCurHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
 		System.out.println("");
 		
 		int battleChoice;
@@ -25,27 +25,42 @@ public class Battle extends Inventory{
 			
 		if (battleChoice == 1) {
 			System.out.println("-------------------------fight----------------------------\n");
+			//System.out.println(((Enemy) opponent).getTypeOfEnemy() + " attacks first ");
+
+			if (player.getStr() > opponent.getStr()) {
+				System.out.println("You attack first ");
 			
-			attack(opponent);
+			    attack(opponent, "npc");
+			    
+			    if (opponent.getCurHp() <= 0 ){
+			    	break;
+			    }
+			    
+			    else
+			    	System.out.println(opponent.getTypeOfEnemy() + " attacks!");
+			    	attack(player, "player");
+			    	
+			    
+				}
 			
-			if (opponent.getCurHp() <= 0) {
-				player.setExp(player.getExp() + opponent.getExpGiven());
-				//gold determined by battle location, specific
-				player.levelUp();
-				System.out.println("Player Victory!");
+			    else {
+			    System.out.println(opponent.getTypeOfEnemy() + " attacks!");
+			    attack(player, "player");
+			    attack(opponent,"npc");
+			    }
+			
+			
+			if(player.getCurHp() <= 0){
+				System.out.println(player.getCurHp() + " You lose ");
 				break;
+				
 			}
-			
-			else if (player.getCurHp() <= 0) {
-				System.out.println("Player Loss.");
-				break;
-				//game reset method
-			}
-			
-			
-			
 		}
-		
+			
+				
+				
+			
+			
 		else if (battleChoice == 3) {
 			Random random = new Random();
 				if (random.nextInt(100) <= 50) {
@@ -55,6 +70,7 @@ public class Battle extends Inventory{
 				else {
 					//battle exit method
 					System.out.println("Successfully escaped!");
+					break;
 				}
 		}
 		
@@ -68,23 +84,30 @@ public class Battle extends Inventory{
 		}
 	}
 		System.out.println("Game over");
+	
 	}
 	
 	
 	
-	protected static void attack(Character opponent){
+	protected static void attack(Character opponent, String type){
 		
-		if (player.getStr() > opponent.getStr()) {
-			System.out.println("You attack first ");
-			
-			opponent.setCurHp(opponent.getCurHp() - (player.getStr() - opponent.getDef()) );
+		
+		Target = type;
+		if (Target == "npc"){
+		
+			System.out.println("Your attack: " + player.getStr() + " " + ((Enemy) opponent).getTypeOfEnemy() + " Defence: " + opponent.getDef());
+			System.out.println("Total damage: " + opponent.HealthDiff(opponent, player)) ;
+			opponent.setCurHp(opponent.getCurHp() - opponent.HealthDiff(opponent, player) );
 			System.out.println("Opponent's health is " + opponent.getCurHp());
-		}
 		
-		if (opponent.getStr() > player.getStr()) {
-			System.out.println(((Enemy) opponent).getTypeOfEnemy() + " Is Stronger and attacks first ");
-			player.setCurHp(player.getCurHp() - (opponent.getStr() - player.getDef()));
-			System.out.println("You're current health is "+player.getCurHp());
+		}
+			else if (Target == "player"){
+				
+			System.out.println(  " Enemy attack: " + opponent.getStr() + " " +  " Your Defence: " + player.getDef());
+			System.out.println("Total damage: " + player.HealthDiff(player, opponent));	
+			player.setCurHp(player.getCurHp() - player.HealthDiff(player, opponent));
+			System.out.println("You're current health is "+ player.getCurHp());
+			}
 		}
 	}
-}
+
