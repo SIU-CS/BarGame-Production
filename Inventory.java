@@ -76,7 +76,7 @@ public class Inventory extends Character{
 		boolean remove = false;
 		for (int i = 0; i <= battleItems.length - 1; i++) {
 			if (battleItems[i] == item) {
-				battleItems[i] = null;
+				battleItems[i] = "";
 				remove = true;
 				break;
 			}
@@ -139,11 +139,10 @@ public class Inventory extends Character{
 	}
 	
 	public static void printBattleItems() {
-		for (int i = 0; i <= battleItems.length - 1; i++) {
-			if(battleItems[i] != null)
+		for (int i = 0; i <= battleItems.length-1; i++) {
 			System.out.println(battleItems[i] + "\n");
 		}
-}
+	}
 	
 	public void printKeyItems() {
 		for (int i = 0; i < keyItems.length - 1; i++) {

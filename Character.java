@@ -3,15 +3,6 @@ package edu.siu.bargame;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/*import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;*/
-
 public class Character {
 	protected int level = 1;
 	protected int exp = 0;
@@ -19,9 +10,9 @@ public class Character {
 	protected int def;
 	protected int maxHp;
 	protected int curHp = maxHp;
-	protected String gender = "";
-	protected String playerDescription = "";
-	protected String name = "";
+	protected String gender;
+	protected String playerDescription;
+	protected String name;
 	protected int expForLevelUp = 80;
 	public static Character player;
 	
@@ -37,76 +28,7 @@ public class Character {
 	}
 	
 	public void createCharacter() {
-		/*JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		JFrame open = new JFrame("BarGame");
-		JLabel sex = new JLabel("Select Your Gender: ");
-		JButton male = new JButton("Male");
-		JButton female = new JButton("Female");
-		JLabel description = new JLabel("Briefly Describe yourself.");
-		JTextField describe = new JTextField();
-		JButton submit = new JButton("Submit");
-		JLabel hero = new JLabel("What is the Hero's Name?");
-		JTextField heroName = new JTextField();
-		JButton heroButton = new JButton("Submit");
-		panel.add(sex);
-		panel.add(male);
-		panel.add(female);
-		open.add(panel);
-		open.setSize(600, 600);
-		open.setLocationRelativeTo(null);
-		open.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		open.setVisible(true);
-		male.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == male) {
-					player.setGender("Male");
-				}
-			}
-			});
-		female.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == female) {
-					player.setGender("Female");
-				}
-			}
-			});
-		if (this.gender != "") {
-			open.remove(panel);
-			panel.remove(sex);
-			panel.remove(male);
-			panel.remove(female);
-			panel.add(description);
-			panel.add(describe);
-			panel.add(submit);
-			open.add(panel);
-		}
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				player.setPlayerDescription(describe.getText());
-			}
-		});
-		
-		
-		if (this.playerDescription != "") {
-			panel.remove(description);
-			panel.remove(describe);
-			panel.remove(submit);
-			panel.add(hero);
-			panel.add(heroName);
-			panel.add(heroButton);
-		}
-		heroButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				player.setName(heroName.getText());
-			}
-		});
-		if (this.name != "") {
-			panel.remove(hero);
-			panel.remove(heroName);
-			panel.remove(heroButton);
-		}*/
-		//player = new Character(7, 7, 60); // created at initiation
+		player = new Character(7, 7, 60); // created at initiation
 		System.out.println("Enter your gender.  M or F.");
 		Scanner sex = new Scanner(System.in);
 		
@@ -217,9 +139,6 @@ public class Character {
 	public void levelUp() {
 		if (exp >= expForLevelUp) {
 			level++;
-			str += (int)(Math.random()*4);
-			def += (int)(Math.random()*3);
-			maxHp += (int)(Math.random()*20);
 			if (exp > expForLevelUp) {
 				exp -= expForLevelUp;
 			}
@@ -238,15 +157,5 @@ public class Character {
 	public String toString(){//print player details
 		return "Name: " + getName() + "\n" + "Gender: " + getGender() + " \n" + "Bio: " + getPlayerDescription() + "\n" ;
 			
-	}
-
-	public int HealthDiff(Character player, Character opponent) {
-		int healthDiff;
-		
-		if((healthDiff = opponent.getStr() - player.getDef()) < 0){
-			return healthDiff = 1;
-		}
-		else 
-			return healthDiff = opponent.getStr()- player.getDef();
 	}
 }
