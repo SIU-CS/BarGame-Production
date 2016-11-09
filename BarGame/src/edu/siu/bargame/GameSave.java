@@ -1,10 +1,11 @@
+package edu.siu.bargame;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class GameSave extends Character implements java.io.Serializable { //Try moving implementation of Serializable, including methods, to CharacterClasses super class, and/or try implementing interface in character superclass if issues are met
+public class GameSave extends Character implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -19,32 +20,5 @@ public class GameSave extends Character implements java.io.Serializable { //Try 
 			return ois.readObject();
 		}
 	}
-/*	FileOutputStream fop = null;
-	File file;
-	
-	try {
-		file = new File("c:/newfile.txt");
-		fop = new FileOutputStream(file);
-	}
-	
-	if (!file.exists()) {
-		file.createNewFile();
-	}
-	byte[] contentInBytes = level.getBytes();
-	}
-	public void saveToXML(String xml) {
-		Document dom;
-		Element e = null;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = (Document) db.newDocument();
-			Element rootElement = (Element) ((org.w3c.dom.Document) dom).createElement("myparameters");
-			e = (Element) ((org.w3c.dom.Document) dom).createElement("brightness");
-			((Node) e).appendChild(((org.w3c.dom.Document) dom).createTextNode("brightness"));
-			((Node) rootElement).appendChild((Node) e);
-		}
-	}*/
-	
 	
 }
