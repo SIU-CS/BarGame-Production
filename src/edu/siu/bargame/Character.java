@@ -9,7 +9,7 @@ public class Character {
 	protected int str;
 	protected int def;
 	protected int maxHp;
-	protected int curHp = maxHp;
+	protected int curHp;
 	protected String gender;
 	protected String playerDescription;
 	protected String name;
@@ -71,8 +71,8 @@ public class Character {
 		return player;
 	}
 
-	public void setHero(Character hero) {
-		this.player = hero;
+	public static void setHero(Character hero) {
+		player = hero;
 	}
 
 	public int getLevel() {
@@ -151,10 +151,10 @@ public class Character {
 	}
 	
 	public int HealthDiff( Character player, Character opponent){
-		int healthDiff;
+		int healthDiff=1;
 		
 		if((healthDiff = opponent.getStr() - player.getDef()) < 0){
-			return healthDiff = 1;
+			return healthDiff;
 		}
 		else 
 			return healthDiff = opponent.getStr()- player.getDef();

@@ -63,7 +63,7 @@ public class Inventory extends Character{
 	public String removeBattleItem(String item) {
 		boolean remove = false;
 		for (int i = 0; i <= battleItems.length - 1; i++) {
-			if (battleItems[i] == item) {
+			if (battleItems[i].equals(item)) {
 				battleItems[i] = null;
 				remove = true;
 				break;
@@ -111,13 +111,13 @@ public class Inventory extends Character{
 	public String removeEquipment(String item) {
 		boolean remove = false;
 		for (int i = 0; i <= equipmentItems.length - 1; i++) {
-			if (equipmentItems[i] == item) {
+			if (equipmentItems[i].equals(item)) {
 				equipmentItems[i] = null;
 				remove = true;
 				break;
 			}
 		}
-		if (remove = true) {
+		if (remove ) {
 			return item + " successfully removed.";
 		}
 		

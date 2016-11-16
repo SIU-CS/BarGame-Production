@@ -1,17 +1,43 @@
 package edu.siu.bargame;
-
+import java.util.Random;
+import java.util.Scanner;
 public class Enemy extends Character {
 	protected int hp;
-	protected int str;
-	protected int def;
+	protected int strength;
+	protected int defense;
 	protected int expGiven;
 	private static String typeValue;
+	protected String Loot;
+	Random rn = new Random();
+	Scanner kb = new Scanner(System.in);
+	String [] dropItems={"Gold","Sword","Potion"};
+	
+	
 	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
-		this.str = str;
-		this.def = def;
+		this.strength = str;
+		this.defense = def;
 		this.expGiven = expGiven;
+	
+	}
+	public int genRandom(){
+		int i =rn.nextInt(3);
+		return i;
+		
+	}
+	public void getDrop(){
+		Loot=dropItems[genRandom()];
+		System.out.println("The enemy dropped"+Loot+"Would you like to pick it up?");
+		String x=kb.nextLine();
+		if(x.equalsIgnoreCase("yes"))
+		{
+			//add item to inventory
+		}
+		else
+		{
+			//exit battle menu
+		}
 	}
 	
 	public int getExpGiven() {
@@ -30,16 +56,16 @@ public class Enemy extends Character {
 	}
 	@Override
 	public int getStr() {
-		return str;
+		return strength;
 	}
 	public void setStr(int str) {
-		this.str = str;
+		this.strength = str;
 	}
 	public int getDef() {
-		return def;
+		return defense;
 	}
 	public void setDef(int def) {
-		this.def = def;
+		this.defense = def;
 	}
 	
 	public static Enemy typeOfEnemy(String type) {
@@ -74,7 +100,7 @@ public class Enemy extends Character {
 		return enemy;
 	}
 	
-	protected Enemy boss(String area) {
+/*	protected Enemy boss(String area) {
 		Enemy enemy = null;
 		switch (area) {
 		//case for each area
@@ -83,7 +109,7 @@ public class Enemy extends Character {
 				enemy = new Enemy(0, 0, 0, 0);
 		}
 		return enemy;
-	}
+	}*/
 	
 	public String getTypeOfEnemy(){
 		return typeValue;
