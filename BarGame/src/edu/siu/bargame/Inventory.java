@@ -1,8 +1,11 @@
 package edu.siu.bargame;
-public class Inventory extends Character {
+
+@SuppressWarnings("serial")
+public class Inventory extends Character {	
+	
 	static String[] battleItems = new String[20];
-	String[] keyItems = new String[6];
-	String[] equipmentItems = new String[5];
+	static String[] keyItems = new String[6];
+	static String[] equipmentItems = new String[5];
 	
 	public void setStartItems() {
 		addBattleItem("potion");
@@ -21,24 +24,24 @@ public class Inventory extends Character {
 		return battleItems;
 	}
 
-	protected void setBattleItems(String[] battleItems) {
-		this.battleItems = battleItems;
+	protected static void setBattleItems(String[] items) {
+		battleItems = items;
 	}
 
 	protected String[] getKeyItems() {
 		return keyItems;
 	}
 
-	protected void setKeyItems(String[] keyItems) {
-		this.keyItems = keyItems;
+	protected static void setKeyItems(String[] items) {
+		keyItems = items;
 	}
 
 	protected String[] getEquipment() {
 		return equipmentItems;
 	}
 
-	protected void setEquipment(String[] equipment) {
-		this.equipmentItems = equipment;
+	protected static void setEquipment(String[] items) {
+		equipmentItems = items;
 	}
 
 	public String addBattleItem(String item) {
