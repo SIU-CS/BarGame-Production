@@ -34,6 +34,7 @@ public class Battle extends Inventory{
 			    System.out.println(" ");
 			    
 			    if (opponent.getCurHp() <= 0 ){
+			    	System.out.println();
 			    	break;
 			    }
 			    
@@ -82,6 +83,13 @@ public class Battle extends Inventory{
 	}
 		System.out.println("Game over");
 	
+	}
+	protected void Battleloot(){
+		System.out.println("Would you like to search your opponent for possible items?");
+		Scanner kb = new Scanner(System.in);
+		String opt = kb.nextLine();
+		
+		
 	}
 
 
