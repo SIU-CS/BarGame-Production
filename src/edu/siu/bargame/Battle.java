@@ -14,6 +14,7 @@ public class Battle extends Inventory{
 		System.out.println("");
 		
 		int battleChoice;
+		int opponentChoice = (int)(Math.random() * ((5) + 1));
 		Scanner option = new Scanner(System.in);
 		
 		
@@ -38,8 +39,21 @@ public class Battle extends Inventory{
 			    }
 			    
 			    else{
+			    	if(opponentChoice <= 3){
 			    	System.out.println(opponent.getTypeOfEnemy() + " attacks!");
 			    	attack(opponent, "player");
+			    }
+			    	else if (opponentChoice == 4 && opponent.getCurHp() != opponent.getMaxHp()){
+			    		System.out.println(opponent.getTypeOfEnemy() + " Uses a potion!");
+			    		opponent.setCurHp(opponent.getCurHp() + 5);
+			    		System.out.println("Opponent's Current health " + opponent.getCurHp());
+			    		
+			    	}
+			    	else if (opponentChoice == 5 && !opponent.getTypeOfEnemy().equals("Boss")){
+			    		System.out.println(opponent.getTypeOfEnemy() +" ran with fear!");
+			    		break;
+			    	}
+			    	
 			    }
 			    
 				}
