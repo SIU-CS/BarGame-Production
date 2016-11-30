@@ -149,6 +149,17 @@ public class Inventory extends Character {
 		}
 	}
 	
+	public boolean searchKeyItems(String item) {
+		boolean found = false;
+		for (int i = 0; i <= keyItems.length-1; i++) {
+			if (keyItems[i].equalsIgnoreCase(item)) {
+				found = true;
+				break;
+			}
+		}
+		return found;
+	}
+	
 	public static void useItem(String item) {
 		switch(item.toLowerCase()) {
 			case "potion":

@@ -3,20 +3,20 @@ package edu.siu.bargame;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-public class Forest extends Story {//if issues arise, extend inventory and change how story is accessed
+public class Town extends Story {//if issues arise, extend inventory and change how story is accessed
 	//boolean visited = false;
 	//boolean currentLocation = true;
 	
-	public Forest() {
+	public Town() {
+		player.setTownVisited(0);//try forestVisited, townVisited, etc in Character for serialization.
 		menu();
-		//visited = true;//try forestVisited, townVisited, etc in Character for serialization.
 	}
 	
 	public void menu() {
-		System.out.println("\nLocation: Silanger\n\n");
-		System.out.println("Entrance\n\n\n");
+		System.out.println("\nLocation: Ferop\n\n");
+		System.out.println("Front\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Enter Shop District\n2:  Examine Location\n3:  Enter Treehouse Section\n4:  Travel To a Different Location\n5:  Story So Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles");
+		System.out.println("\n\n1 to enter shop district\t2 to examine location\t3 to enter treehouses\t4 to travel to a different location\t5 for story so far\t6 to view stats\n7 to view inventories\t8 Search for battles");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -24,10 +24,10 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			shopDistrict();
 			break;
 		case 2:
-			System.out.println(forestExaminations[0]);
+			System.out.println(townExaminations[0]);
 			break;
 		case 3:
-			secondaryArea();//treehouses
+			secondaryArea();//residential road
 			break;
 		case 4:
 			//travel to a new location
@@ -73,17 +73,17 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 	}
 
 	private void secondaryArea() {
-		System.out.println("\nLocation: Salinger\n\n");
-		System.out.println("Treehouses\n\n\n");
+		System.out.println("\nLocation: Ferop\n\n");
+		System.out.println("Residential Road\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Return to Previous Location\n2:  Examine Location\n3:  Story so Far\n4:  View Stats\n5:  View Inventories\n6:  Speak With Locals\n7:  Tall Tree");
+		System.out.println("\n\n1:  Return to previous Location\n2:  Examine Location\n3:  Story so Far\n4:  View Stats\n5:  View Inventories\n6:  Speak With Locals\n7 Swamp");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
 		case 1:
 			break;
 		case 2:
-			System.out.println(forestExaminations[2]);
+			System.out.println(townExaminations[2]);
 			break;
 		case 3:
 			//STORY SO FAR
@@ -98,14 +98,14 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			conversationMenu();
 			break;
 		case 7:
-			if (player.getLevel() < 5) {
+			if (player.getLevel() < 10 || !searchKeyItems("Machete")) {
 				System.out.println(levelBarrier[0]);
 			}
-			else {
-				System.out.println(story[1]);
+			else if (player.getLevel() >= 10 && searchKeyItems("Machete")) {
+				System.out.println(story[2]);
 				storyCounter++;
-				//Boss Battle
-				Town town = new Town();
+				//boss battle
+				Castle castle = new Castle();
 			}
 			break;
 		default:
@@ -116,31 +116,26 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 	}
 	
 	private void conversationMenu() {
-		System.out.println("\nLocation: Salinger\n\n");
+		System.out.println("\nLocation: Ferop\n\n");
 		System.out.println("Treehouses\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println(player.getName()+ " sees an old man, two young children, and a man with a war axe strung across his back.\n\n"
-		+ "1: Speak With The Old Man, 2: Speak With The Children, 3: Speak With The Man, 4: Exit." );
+		System.out.println(player.getName()+ " spots a few individuals nearby who are not busy.  Among them are a middle-aged woman with a sunhat, a man looking towards"
+				+ "the swamp, and a man with glasses staring at the cover of a book with a thoughtful expression.  Determine who to speak to, it's a great chance to gather information!\n\n"
+		+ "1:  Speak With The Woman, 2:  Speak With The Man, 3:  Speak With The Professor, 4:  Exit.");
 		Scanner input = new Scanner(System.in);
 		int selection = input.nextInt();
 		switch (selection) {
 		case 1:
-			if (searchKeyItems("Ancient Book")) {
-				System.out.println(forestConversations[1]);
-				player.setBookDecipher(0);
-				conversationMenu();
-			}
-			else {
-				System.out.println(forestConversations[0]);
-				conversationMenu();
-			}
+			System.out.println(townConversations[0]);
+			conversationMenu();
 			break;
 		case 2:
-			System.out.println(forestConversations[2]);
+			System.out.println(townConversations[2]);
 			conversationMenu();
 			break;
 		case 3:
-			System.out.println(forestConversations[3]);
+			System.out.println(townConversations[3]);
+			//if inventory for sidequest, get book
 			conversationMenu();
 			break;
 		case 4:
@@ -150,8 +145,8 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 	}
 
 	private void shopDistrict() {
-		System.out.println("\nLocation: Salinger\n\n");
-		System.out.println("Shop District\n\n\n");
+		System.out.println("\nLocation: Ferop\n\n");
+		System.out.println("Main Street\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
 		System.out.println("\n\n1:  Return to Previous Location\n2:  Examine Location\n3:  Story so Far\n4:  View Stats\n5:  View Inventories\n6:  Visit Shop");
 		Scanner choice = new Scanner(System.in);
@@ -160,7 +155,7 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 		case 1:
 			break;
 		case 2:
-			System.out.println(forestExaminations[1]);
+			System.out.println(townExaminations[1]);
 			break;
 		case 3:
 			//STORY SO FAR

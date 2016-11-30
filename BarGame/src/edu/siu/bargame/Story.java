@@ -34,9 +34,9 @@ public class Story extends Inventory{
 			player.getName() + " enters a less crowded area of Silanger.  The inhabitants of the forest are sitting atop"
 			+ " treehouses, observing the sky.  Only a few remain on the dirt road.  This could be a good chance to learn something from the inhabitants."};
 	
-	protected static String townExaminations[] = {};
+	protected static String townExaminations[] = {"This is Ferop, neighbor of the former city of Icclea.  The weather is mild year-round and it is all in all a peaceful settlement.  The people are friendly, but the town is secluded.", "The town's Main Street is bustling.  People are weaving in and out of various stores gleefully.  The town is surprisingly large and bustling for its location.", "The street is peaceful.  A few residents are moving about, tending tending to their yards or just chatting.  A few of them are unoccupied, this could be a good opportunity to gather information!"};
 	
-	protected static String castleExaminations[] = {};//the book unlocks a special shop item to increase your defense greatly
+	//protected static String castleExaminations[] = {};//the book unlocks a special shop item to increase your defense greatly
 	
 	protected static String story[] = {"The world is amidst an era of great chaos.  Following the death of the great King Xaltis, a long-lasting "
 			+ "era of peace was broken.\n\nIn the aftermath of a Great War, much of the population has been destroyed."
@@ -49,7 +49,7 @@ public class Story extends Inventory{
 			+ "parapets.  A large shadow descends upon " + player.getName() + ".  Golden red scales, sharp claws, razor teeth.  The surrounding temperature increases.  The dragon appears.  It spits a blast of fire at " + player.getName() + ", who narrowly avoids it.  The ground that was hit remains hot.  It flies at you.  The final challenge begins NOW!", "The castle has been retaken.  Your strength "
 			+ "has been proven to all in the land.  " + player.getName() + " seizes the throne to rule the kingdom.  Only time will tell if true peace will return...\n\n\n                                               THANKS FOR PLAYING!\n\n\n                                       ~Lucas, Jackson, David"};//boss 1--Undead War Mammoth, boss 2--Two-headed snake
 	
-	protected static String levelBarrier[] = {"You must be at least level 5 to enter this location.", "You must be at least level 10 to enter this location.", "You must be at least level 15 to enter this location."};
+	protected static String levelBarrier[] = {"You must be at least level 5 to enter this location.", "You must be at least level 10 and own a machete to enter this location.", "You must be at least level 15 to enter this location."};
 	
 	public String[] getForestConversations() {
 		return forestConversations;

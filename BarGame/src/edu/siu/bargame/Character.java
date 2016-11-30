@@ -14,6 +14,45 @@ public class Character {
 	protected String playerDescription = "";
 	protected String name = "";
 	protected int expForLevelUp = 80;
+	int forestVisited = 0;
+	int townVisited = 1;
+	int castleVisited = 1;
+	int bookDecipher = 1;
+	
+	public int getForestVisited() {
+		return forestVisited;
+	}
+
+	public void setForestVisited(int forestVisited) {
+		this.forestVisited = forestVisited;
+	}
+
+	public int getTownVisited() {
+		return townVisited;
+	}
+
+	public void setTownVisited(int townVisited) {
+		this.townVisited = townVisited;
+	}
+
+	public int getCastleVisited() {
+		return castleVisited;
+	}
+
+	public void setCastleVisited(int castleVisited) {
+		this.castleVisited = castleVisited;
+	}
+
+
+	public int getBookDecipher() {
+		return bookDecipher;
+	}
+
+	public void setBookDecipher(int bookDecipher) {
+		this.bookDecipher = bookDecipher;
+	}
+
+
 	public static Character player;
 	
 	public Character() {
