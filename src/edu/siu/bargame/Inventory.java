@@ -1,8 +1,8 @@
 package edu.siu.bargame;
 public class Inventory extends Character{
-	static String[] battleItems = new String[20];
-	String[] keyItems = new String[6];
-	String[] equipmentItems = new String[5];
+	static String[] battleItems = new String[20]; //battle items anything that can be consumed such as food potion etc
+	String[] keyItems = new String[6]; //key items gold
+	String[] equipmentItems = new String[5]; // equipment items any kind of armor or weapons a
 	
 	public void setStartItems() {
 		addBattleItem("Potion");
