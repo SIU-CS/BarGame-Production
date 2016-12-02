@@ -1,14 +1,15 @@
 package edu.siu.bargame;
 import java.util.Random;
 import java.util.Scanner;
-public class Battle extends Inventory{
+public class Battle extends Inventory {
 
 	public static String Target;
+	private String items[]= {"gold","jewel","food","potion","gun"};
 	
 	protected static void battle(String enemy) {
 		//Enemy opponent = new Enemy(7,4,3,9);
 		Enemy opponent = Enemy.typeOfEnemy(enemy);//new Enemy(7, 4, 3, 9);
-		
+		levelScale(player,opponent);
 		System.out.println("A " + opponent.getTypeOfEnemy() + " challenges you!");
 		System.out.println(opponent.getTypeOfEnemy() +" "+" HP: "+ opponent.getCurHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
 		System.out.println("");
@@ -25,8 +26,7 @@ public class Battle extends Inventory{
 			
 		if (battleChoice == 1) {
 			System.out.println("-------------------------fight----------------------------\n");
-			//System.out.println(((Enemy) opponent).getTypeOfEnemy() + " attacks first ");
-
+			//System.out.println(((Enemy) opponent).getTypeOfEnemy() + " attacks first "
 			if (player.getStr() > opponent.getStr()) {
 				System.out.println("You attack first ");
 			
@@ -88,8 +88,61 @@ public class Battle extends Inventory{
 		System.out.println("Would you like to search your opponent for possible items?");
 		Scanner kb = new Scanner(System.in);
 		String opt = kb.nextLine();
+		boolean set = true;
+		boolean set2= true;
+		while(set==true){
+		
+			if(opt.equalsIgnoreCase("yes")){
+				while(set2==true){
+				String ranIt= randomItem();
+				System.out.println("Item found: "+ranIt);
+				System.out.println("Would you like to take this item?");
+				String opt2 = kb.nextLine();
+				if(opt2.equalsIgnoreCase("yes")){
+						System.out.println("");
+						set2=false;
+				}
+				if(opt2.equalsIgnoreCase("no")){
+					set2=false;
+					
+				}
+				else{
+					System.out.println("Please enter a valid response");
+				}
+				}
+				
+			}
+			if(opt.equalsIgnoreCase("no")){
+				System.out.println("back to exploring area");
+				set=false;
+			}
+			else{
+				System.out.println("Please enter a valid response");
+			}
+			
+		}
 		
 		
+	}
+	protected void CheckitemType(String item){
+
+			if(item.equalsIgnoreCase("food")|| item.equalsIgnoreCase("potion")|| item.equalsIgnoreCase("elixir")){
+				addBattleItem(item);
+			}
+			if(item.equalsIgnoreCase("gold")|| item.equalsIgnoreCase("jewel")|| item.equalsIgnoreCase("amulet")){
+				addKeyItem(item);
+			}
+			if(item.equalsIgnoreCase("helmet")||item.equalsIgnoreCase("armor")||item.equalsIgnoreCase("cape")||item.equalsIgnoreCase("")){
+				addEquipment(item);
+			}
+			
+		
+	}
+	protected String randomItem(){
+		Random ran = new Random();
+		String items[]= {"gold","jewel","food","potion","gun"};
+		int x= ran.nextInt(5-0);
+		return items[x];
 	}
 
 
@@ -126,5 +179,21 @@ public class Battle extends Inventory{
 			System.out.println("You're current health is "+ player.getCurHp());
 			}
 		}
+	public static void levelScale(Character x, Enemy y) {
+		//compare character str with enemy def, character def with enemy str.  If character str and def > enemy's, increase all enemy stats by 1
+		int cStr, cDef, eStr, eDef;
+		int attC=0;
+		cStr= x.getStr();
+		cDef= x.getDef();
+		eStr= y.getStr();
+		eDef= y.getDef();
+		if(cStr>eStr &&  cDef > eDef){
+			++attC;
+		}
+		y.setDef(y.getDef()+attC);
+		y.setStr(y.getStr()+attC);
+		y.setMaxHp(y.getMaxHp()+attC);
+		
+	}
 	}
 

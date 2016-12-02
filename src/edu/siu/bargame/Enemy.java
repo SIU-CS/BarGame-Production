@@ -2,6 +2,12 @@ package edu.siu.bargame;
 import java.util.Random;
 import java.util.Scanner;
 public class Enemy extends Character {
+	
+	
+	public EnemyInventory(String [] items){
+		this.items=items;
+	}
+	
 	protected int hp;
 	protected int strength;
 	protected int defense;
@@ -10,7 +16,7 @@ public class Enemy extends Character {
 	protected String Loot;
 	Random rn = new Random();
 	Scanner kb = new Scanner(System.in);
-	String [] dropItems={"Gold","Sword","Potion"};
+	
 	
 	
 	
@@ -26,19 +32,7 @@ public class Enemy extends Character {
 		return i;
 		
 	}
-	public void getDrop(){
-		Loot=dropItems[genRandom()];
-		System.out.println("The enemy dropped"+Loot+"Would you like to pick it up?");
-		String x=kb.nextLine();
-		if(x.equalsIgnoreCase("yes"))
-		{
-			//add item to inventory
-		}
-		else
-		{
-			//exit battle menu
-		}
-	}
+	
 	
 	public int getExpGiven() {
 		return expGiven;
@@ -116,7 +110,5 @@ public class Enemy extends Character {
 		
 	}
 	
-	protected void levelScale() {
-		//compare character str with enemy def, character def with enemy str.  If character str and def > enemy's, increase all enemy stats by 1
-	}
+	
 }
