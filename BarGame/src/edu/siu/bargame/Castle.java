@@ -3,12 +3,11 @@ package edu.siu.bargame;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-public class Castle extends Story {//if issues arise, extend inventory and change how story is accessed
-	//boolean visited = false;
-	//boolean currentLocation = true;
+public class Castle extends Story {
 	
 	public Castle() {
-		player.setCastleVisited(0);
+		player.setCastleVisited(true);
+		player.setCurrentLocation("Castle");
 	}
 	
 	public void menu() {
@@ -26,10 +25,31 @@ public class Castle extends Story {//if issues arise, extend inventory and chang
 			conversationMenu();
 			break;
 		case 3:
-			//travel to a new location
+			int dest;
+			if (player.forestVisited) {
+				System.out.println("Would you like to travel to Salinger?  Press 1 for yes and 2 for no.");
+				Scanner travel = new Scanner(System.in);
+				dest = travel.nextInt();
+				if (dest == 1) {
+					Forest forest = new Forest();
+					forest.menu();
+				}
+			}
+			if (player.castleVisited) {
+				System.out.println("Would you like to travel to the Ferop?  Press 1 for yes and 2 for no.");
+				Scanner travel = new Scanner(System.in);
+				dest = travel.nextInt();
+				if (dest == 1) {
+					Town town = new Town();
+					town.menu();
+				}
+			}
 			break;
 		case 4:
-			//story so far
+			for (int i = 0; i < getStoryCounter(); i++) {
+				System.out.println(story[i]);
+				System.out.println("\n\n");
+			}
 			break;
 		case 5:
 			System.out.println(player.toString() + "\n" + player.PrintStats());
@@ -38,17 +58,19 @@ public class Castle extends Story {//if issues arise, extend inventory and chang
 			inventoryMenu();
 			break;
 		case 7:
-			Battle.battle("Soldier");
+			Battle.battle();
 			break;
 		case 8:
 			if (player.getLevel() < 15) {
 				System.out.println(levelBarrier[2]);
 			}
 			else {
-				System.out.println(story[3]);
-				//boss battle
-				System.out.println(story[4]);
-				System.exit(0);
+				if (storyCounter < 4) {
+					System.out.println(story[3]);
+					Battle.bossBattle();
+					System.out.println(story[4]);
+					System.exit(0);
+				}
 			}
 			break;
 		default:

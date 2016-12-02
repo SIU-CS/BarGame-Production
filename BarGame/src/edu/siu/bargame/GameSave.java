@@ -32,15 +32,16 @@ public class GameSave extends Inventory implements java.io.Serializable {
 			oos.writeInt(player.getLevel());
 			oos.writeInt(player.getMaxHp());
 			oos.writeInt(player.getStr());
-			oos.writeInt(player.getForestVisited());
-			oos.writeInt(player.getTownVisited());
-			oos.writeInt(player.getCastleVisited());
+			oos.writeBoolean(player.getForestVisited());
+			oos.writeBoolean(player.getTownVisited());
+			oos.writeBoolean(player.getCastleVisited());
 			oos.writeInt(player.getBookDecipher());
 			oos.writeObject(player.getHero());//remove if errors
 			oos.writeObject(Inventory.battleItems);
 			oos.writeObject(Inventory.equipmentItems);
 			oos.writeObject(Inventory.keyItems);
 			oos.close();
+			System.out.println("Game Saved.");
 		}
 	}
 	
@@ -56,15 +57,18 @@ public class GameSave extends Inventory implements java.io.Serializable {
 			player.setLevel(ois.readInt());
 			player.setMaxHp(ois.readInt());
 			player.setStr(ois.readInt());
-			player.setForestVisited(ois.readInt());
-			player.setTownVisited(ois.readInt());
-			player.setCastleVisited(ois.readInt());
+			player.setForestVisited(ois.readBoolean());
+			player.setTownVisited(ois.readBoolean());
+			player.setCastleVisited(ois.readBoolean());
 			player.setBookDecipher(ois.readInt());
+			
 			player.setHero((Character) ois.readObject());//remove if errors
 			Inventory.setBattleItems((String[]) ois.readObject());
 			Inventory.setEquipment((String[]) ois.readObject());
 			Inventory.setKeyItems((String[]) ois.readObject());
+			player.setCurrentLocation("Forest");
 			ois.close();
+			System.out.println("Game Loaded.");
 		}
 	}
 	

@@ -1,12 +1,13 @@
 package edu.siu.bargame;
 
+import java.util.Random;
+
 public class Enemy extends Character {
 	protected int hp;
 	protected int str;
 	protected int def;
 	protected int expGiven;
-	protected static String typeValue;
-	
+	private static String typeValue;
 	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
@@ -14,9 +15,7 @@ public class Enemy extends Character {
 		this.def = def;
 		this.expGiven = expGiven;
 	}
-	public String getTypeValue() {
-		return typeValue;
-	}
+	
 	public int getExpGiven() {
 		return expGiven;
 	}
@@ -45,53 +44,78 @@ public class Enemy extends Character {
 		this.def = def;
 	}
 	
-	public static Enemy typeOfEnemy() {
-		Enemy enemy = null;
-		int type = (int) (Math.random()*50);
-		if (type <= 50) {
-			typeValue = "Soldier";
-			enemy = new Enemy(10, 2, 2, 4);
-			levelScale(enemy);
+	public static Enemy typeOfEnemy(/*String type*/) {//Need to change from this pseudorandom, generates same result (soldier, undead) every time called.  Try Random object?
+		//typeValue = type;
+		int scale;
+		Random random = new Random();
+		if (player.getCurrentLocation() == "Forest") {
+			scale = random.nextInt(3) + 1;
 		}
-		/*switch (type) {
-			case "Soldier":
-				typeValue = "Soldier";
+		else if (player.getCurrentLocation() == "Town") {
+			scale = random.nextInt(6) + 1;
+		}
+		else {
+			scale = random.nextInt(9) + 1;
+		}
+		Enemy enemy = null;
+		switch (scale) {
+			case 1:
 				enemy = new Enemy(8, 4, 3, 10);
+				typeValue = "Soldier";
 				break;
-			case "Undead":
-				typeValue = "Undead";
+			case 2:
 				enemy = new Enemy(10, 2, 1, 5);
+				typeValue = "Undead";
 				break;
-			case "Spider":
-				typeValue = "Spider";
+			case 3:
 				enemy = new Enemy(3, 2, 0, 3);
+				typeValue = "Spider";
 				break;
-			case "Bandit":
-				typeValue = "Bandit";
+			case 4:
 				enemy = new Enemy(6, 3, 3, 6);
+				typeValue = "Bandit";
 				break;
-			case "Wanderer":
-				typeValue = "Wanderer";
+			case 5:
 				enemy = new Enemy(6, 2, 3, 6);
+				typeValue = "Wanderer";
 				break;
-			case "Mercenary":
-				typeValue = "Mercenary";
+			case 6:
 				enemy = new Enemy(7, 4, 3, 9);
+				typeValue = "Mercenary";
 				break;
-			/*case "Boss":
-				enemy = new Enemy(20 , 5, 10, 9);
+			case 7:
+				enemy = new Enemy(20, 6, 12, 10);
+				typeValue = "Golem";
 				break;
+			case 8:
+				enemy = new Enemy(18, 9, 7, 10);
+				typeValue = "Wyvern";
+				break;
+			case 9:
+				enemy = new Enemy(15, 10, 4, 11);
+				typeValue = "Sorceror";
 			default:
 				System.out.println("Invalid enemy type entered.");
 				enemy = new Enemy(0, 0, 0, 0);
-		}*/
+		}
+		enemy.levelScale();
 		return enemy;
 	}
 	
-	protected Enemy boss(String area) {
+	protected static Enemy boss() {
 		Enemy enemy = null;
-		switch (area) {
-		//case for each area
+		switch (player.currentLocation) {
+		case "Forest":
+			enemy = new Enemy(43, 23, 16, 400);
+			typeValue = "Undead War Mammoth";
+			break;
+		case "Town":
+			enemy = new Enemy(86, 49, 24, 800);
+			typeValue = "Monstrous Two-Headed Snake";
+			break;
+		case "Castle":
+			enemy = new Enemy(150, 76, 40, 1200);
+			typeValue = "Fell Dragon";
 			default:
 				System.out.println("Invalid Location entered");
 				enemy = new Enemy(0, 0, 0, 0);
@@ -104,10 +128,12 @@ public class Enemy extends Character {
 		
 	}
 	
-	protected static void levelScale(Enemy enemy) {
-		enemy.setMaxHp(enemy.getMaxHp()*player.getLevel());
-		enemy.setDef(enemy.getDef()*player.getLevel()-3);
-		enemy.setStr(player.getLevel()*enemy.getStr()-5);
-		enemy.setExpGiven(player.getLevel() + 2*enemy.getExpGiven());
+	protected void levelScale() {
+		int scale = player.getLevel();
+		Random random = new Random();
+		this.str = this.str + (scale * (random.nextInt(3) +1));
+		this.def = this.def + (scale * (random.nextInt(2) + 1));
+		this.hp = this.hp + (scale * (random.nextInt(4) + 1));
+		this.expGiven = this.expGiven + (scale * (random.nextInt(5) + 1));
 	}
 }

@@ -15,6 +15,12 @@ public class Story extends Inventory{
 			 + "\"Do you think that we could become strong enough to beat it?\" asks the boy.\n\n\"Don't be stupid, it's left over from the royal army!", "\"You should just leave me be, stranger.  I'm not the"
 			 		+ " friendly type and I have business here.  I'm going to avenge everyone that died from the Feropian militia, but I need that treasure this creature has to enter Ferop.\""};
 	
+	public int getStoryCounter() {
+		return storyCounter;
+	}
+	public void setStoryCounter(int storyCounter) {
+		this.storyCounter = storyCounter;
+	}
 	protected static String townConversations[] = {/*woman, man, professor*/"\"Hey, how can I help you?  Why, this town here was spared in the war thanks to the ceasefire, but it sure was close.  Lotsa people hate us though, shame.  "
 			+ "They blame us Ferop for a lot in the war, despite us not participating.  Our neighborin' city, or I ought say former neighborin' city, Icclea, God rest their souls, had the same militia uniforms as us, so people have been mistaking us for them.  They were all wiped"
 			+ "out in that awful war.  I wish peace could return again for good...I'm scared that someone may get the idea of revenge and start things up again, which would be bad for everybody, involved or not.\"", "\"Good day to you!  "
@@ -35,8 +41,6 @@ public class Story extends Inventory{
 			+ " treehouses, observing the sky.  Only a few remain on the dirt road.  This could be a good chance to learn something from the inhabitants."};
 	
 	protected static String townExaminations[] = {"This is Ferop, neighbor of the former city of Icclea.  The weather is mild year-round and it is all in all a peaceful settlement.  The people are friendly, but the town is secluded.", "The town's Main Street is bustling.  People are weaving in and out of various stores gleefully.  The town is surprisingly large and bustling for its location.", "The street is peaceful.  A few residents are moving about, tending tending to their yards or just chatting.  A few of them are unoccupied, this could be a good opportunity to gather information!"};
-	
-	//protected static String castleExaminations[] = {};//the book unlocks a special shop item to increase your defense greatly
 	
 	protected static String story[] = {"The world is amidst an era of great chaos.  Following the death of the great King Xaltis, a long-lasting "
 			+ "era of peace was broken.\n\nIn the aftermath of a Great War, much of the population has been destroyed."

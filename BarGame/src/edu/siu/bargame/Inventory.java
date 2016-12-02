@@ -170,7 +170,6 @@ public class Inventory extends Character {
 				System.out.println("You drink the potion, you're health is now " + player.getCurHp());
 				removeBattleItem(item);
 				break;
-			//auto use case "Pheonix Down":
 			case "Great Potion":
 				player.setCurHp(player.getCurHp()+60);
 				System.out.println(player.getCurHp());

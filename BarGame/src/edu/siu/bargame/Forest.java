@@ -8,8 +8,7 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 	//boolean currentLocation = true;
 	
 	public Forest() {
-		menu();
-		//visited = true;//try forestVisited, townVisited, etc in Character for serialization.
+		player.setCurrentLocation("Forest");
 	}
 	
 	public void menu() {
@@ -30,10 +29,31 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			secondaryArea();//treehouses
 			break;
 		case 4:
-			//travel to a new location
+			int dest;
+			if (player.townVisited) {
+				System.out.println("Would you like to travel to Ferop?  Press 1 for yes and 2 for no.");
+				Scanner travel = new Scanner(System.in);
+				dest = travel.nextInt();
+				if (dest == 1) {
+					Town town = new Town();
+					town.menu();
+				}
+			}
+			if (player.castleVisited) {
+				System.out.println("Would you like to travel to the Capital?  Press 1 for yes and 2 for no.");
+				Scanner travel = new Scanner(System.in);
+				dest = travel.nextInt();
+				if (dest == 1) {
+					Castle castle = new Castle();
+					castle.menu();
+				}
+			}
 			break;
 		case 5:
-			//story so far
+			for (int i = 0; i < getStoryCounter(); i++) {
+				System.out.println(story[i]);
+				System.out.println("\n\n");
+			}
 			break;
 		case 6:
 			System.out.println(player.toString() + "\n" + player.PrintStats());
@@ -42,7 +62,7 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			inventoryMenu();
 			break;
 		case 8:
-			Battle.battle("Soldier");
+			Battle.battle();
 			break;
 		default:
 		}
@@ -86,7 +106,10 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			System.out.println(forestExaminations[2]);
 			break;
 		case 3:
-			//STORY SO FAR
+			for (int i = 0; i < getStoryCounter(); i++) {
+				System.out.println(story[i]);
+				System.out.println("\n\n");
+			}
 			break;
 		case 4:
 			System.out.println(player.toString() + "\n" + player.PrintStats());
@@ -102,10 +125,13 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 				System.out.println(levelBarrier[0]);
 			}
 			else {
-				System.out.println(story[1]);
-				storyCounter++;
-				//Boss Battle
-				Town town = new Town();
+				if (storyCounter < 2) {
+					System.out.println(story[1]);
+					setStoryCounter(getStoryCounter() + 1);
+					Battle.bossBattle();
+					Town town = new Town();
+					town.menu();
+				}
 			}
 			break;
 		default:
@@ -163,7 +189,10 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			System.out.println(forestExaminations[1]);
 			break;
 		case 3:
-			//STORY SO FAR
+			for (int i = 0; i < getStoryCounter(); i++) {
+				System.out.println(story[i]);
+				System.out.println("\n\n");
+			}
 			break;
 		case 4:
 			System.out.println(player.toString() + "\n" + player.PrintStats());

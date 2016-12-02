@@ -1,4 +1,5 @@
 package edu.siu.bargame;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -14,32 +15,41 @@ public class Character {
 	protected String playerDescription = "";
 	protected String name = "";
 	protected int expForLevelUp = 80;
-	int forestVisited = 0;
-	int townVisited = 1;
-	int castleVisited = 1;
+	boolean forestVisited = true;
+	boolean townVisited = false;
+	boolean castleVisited = false;
 	int bookDecipher = 1;
+	String currentLocation = "Forest";
 	
-	public int getForestVisited() {
+	public void setCurrentLocation(String currentLocation2) {
+		currentLocation = currentLocation2;	
+	}
+	
+	public String getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public boolean getForestVisited() {
 		return forestVisited;
 	}
 
-	public void setForestVisited(int forestVisited) {
+	public void setForestVisited(boolean forestVisited) {
 		this.forestVisited = forestVisited;
 	}
 
-	public int getTownVisited() {
+	public boolean getTownVisited() {
 		return townVisited;
 	}
 
-	public void setTownVisited(int townVisited) {
+	public void setTownVisited(boolean townVisited) {
 		this.townVisited = townVisited;
 	}
 
-	public int getCastleVisited() {
+	public boolean getCastleVisited() {
 		return castleVisited;
 	}
 
-	public void setCastleVisited(int castleVisited) {
+	public void setCastleVisited(boolean castleVisited) {
 		this.castleVisited = castleVisited;
 	}
 
@@ -177,11 +187,12 @@ public class Character {
 	}
 	
 	public void levelUp() {
+		Random random = new Random();
 		if (exp >= expForLevelUp) {
 			level++;
-			str += (int)(Math.random()*4);
-			def += (int)(Math.random()*3);
-			maxHp += (int)(Math.random()*20);
+			str += random.nextInt(4) + 1;
+			def += random.nextInt(3) + 1;
+			maxHp += random.nextInt(6) + 1;
 			if (exp > expForLevelUp) {
 				exp -= expForLevelUp;
 			}
@@ -212,5 +223,6 @@ public class Character {
 		else 
 			return healthDiff = opponent.getStr()- player.getDef();
 		//player.setCurHp(player.getCurHp() - (opponent.getStr() - player.getDef()));
-}
+	}
+
 }
