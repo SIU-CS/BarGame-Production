@@ -36,12 +36,37 @@ public class Shop extends Inventory {
 	protected void buyItem(Character x){
 		
 	}
-	protected void brawl(Character x){
+	protected void brawl(Character x, ShopKeeper y){
+		boolean brawling=true;
+		while(brawling==true){
+		int i= 0;
+		System.out.println("Connected on a punch to the shop keeper, several more shots and he will be KO'd");
+		int g = brawlGen();
+		if(g>=5){
+			y.setHp(y.getHp()-5);
+		}
+		else
+			System.out.println("Weak attack on Shop keeper, virtually no damage way to be a wimp");
+				y.setHp(y.getHp()-1);
+		}
+		int j= brawlGen();
+		if(j>=5){
+			System.out.println("Shop Keeper landed several combos on you, decent damage");
+			x.setCurHp(x.getCurHp()-5);
 		
-		
+		}
+		else
+			System.out.println("Shop keep landed some punches but no significant damage");
+			x.setCurHp(x.getCurHp()-1));
+			
+			
+			
+	}
+	protected int brawlGen(){
+		int x= ran.nextInt(10-1+1)+1;
 		
 	}
-	protected void sellItem(Character x){
+	proteacted void sellItem(Character x){
 		
 	}
 	protected void Shopping(Character x){
@@ -72,18 +97,33 @@ public class Shop extends Inventory {
 	}
 	
 	protected void steal(Character x){
-		
+		//make sure it checks inventory available space, allows user to remove item if necessary or try to resell it to the shop keeper 
+		String stolen;
 		System.out.println("The shop keeper isn't looking would you like to try and steal an item?");
-		
 		System.out.println("What item would you like to try and steal?");
-		
+		displayShopItems();
+		stolen= kb.nextLine();
+		int val=rand();
+		if(val>90){
+			System.out.println("Item successfully stolen");
+			CheckitemType(stolen);
+		}
+		else if(val<=90){
+			System.out.println("Theft attempt unsuccesful");
+			ShopKeeper nShkp = new ShopKeeper(x.getCurHp(),x.getStr(),x.getDef());
+			System.out.println("Now engaged in a brawl with the Shop Keeper, square up");
+			while (x.getCurHp()>10 || nShkp.getHp()>10){
+				brawl(Character x, ShopKeeper y);
+			}
+			
+		}
 		
 		
 	}
 	protected int rand(){
 		int x= ran.nextInt(100-1+1)+1;
 		return x;
-	}
+	} 
 	
 	
 	

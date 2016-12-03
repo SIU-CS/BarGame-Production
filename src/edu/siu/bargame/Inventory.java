@@ -171,6 +171,20 @@ public class Inventory extends Character{
 				System.out.println("Item not found!");
 		}
 	}
+	protected void CheckitemType(String item){
+		//move to inventory class and refactor n
+		if(item.equalsIgnoreCase("food")|| item.equalsIgnoreCase("potion")|| item.equalsIgnoreCase("elixir")){
+			addBattleItem(item);
+		}
+		if(item.equalsIgnoreCase("gold")|| item.equalsIgnoreCase("jewel")|| item.equalsIgnoreCase("amulet")){
+			addKeyItem(item);
+		}
+		if(item.equalsIgnoreCase("helmet")||item.equalsIgnoreCase("armor")||item.equalsIgnoreCase("cape")||item.equalsIgnoreCase("")){
+			addEquipment(item);
+		}
+		
+	
+}
 	
 	public void equipBonus() {
 		//String head, torso, leggings, boots, weapon;//leather, iron, steel, blessed\\wooden, iron, steel, blessed

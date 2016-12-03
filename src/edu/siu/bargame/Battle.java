@@ -124,20 +124,7 @@ public class Battle extends Inventory {
 		
 		
 	}
-	protected void CheckitemType(String item){
-
-			if(item.equalsIgnoreCase("food")|| item.equalsIgnoreCase("potion")|| item.equalsIgnoreCase("elixir")){
-				addBattleItem(item);
-			}
-			if(item.equalsIgnoreCase("gold")|| item.equalsIgnoreCase("jewel")|| item.equalsIgnoreCase("amulet")){
-				addKeyItem(item);
-			}
-			if(item.equalsIgnoreCase("helmet")||item.equalsIgnoreCase("armor")||item.equalsIgnoreCase("cape")||item.equalsIgnoreCase("")){
-				addEquipment(item);
-			}
-			
-		
-	}
+	
 	protected String randomItem(){
 		Random ran = new Random();
 		String items[]= {"gold","jewel","food","potion","gun"};
