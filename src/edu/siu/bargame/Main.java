@@ -28,7 +28,7 @@ public class Main {
 		while(game){
 			
 			UInterface.Interface();
-			UInterface.getChoice();
+			//UInterface.getChoice();
 			switch (UInterface.getChoice()) {
 				case 1:
 					// Converse with nearby npc's

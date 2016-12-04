@@ -14,6 +14,7 @@ public class Character {
 	protected String playerDescription;
 	protected String name;
 	protected int expForLevelUp = 80;
+	protected String playerClass;
 	public static Character player;
 	
 	public Character() {
@@ -65,6 +66,13 @@ public class Character {
 		Scanner name = new Scanner(System.in);
 		String title = name.next();
 		this.name = title;
+		System.out.println("Please choose a player class: \n"
+			+ " Rogue"
+			+ " Mage"
+			+ " Warrior"
+			+ " Hunter");
+		Scanner scan = new Scanner(System.in);
+		playerClass = scan.nextLine();
 	}
 	
 	public Character getHero() {
@@ -136,6 +144,9 @@ public class Character {
 	public void setExpForLevelUp(int expForLevelUp) {
 		this.expForLevelUp = expForLevelUp;
 	}
+	public String getplayerClass(){
+		return playerClass;
+	}
 	
 	public void levelUp() {
 		level++;
@@ -168,7 +179,7 @@ public class Character {
 	
 	@Override
 	public String toString(){//print player details
-		return "Name: " + getName() + "\n" + "Gender: " + getGender() + " \n" + "Bio: " + getPlayerDescription() + "\n" ;
+		return "Name: " + getName() + "\n" + "Gender: " + getGender() + " \n" + "Bio: " + getPlayerDescription() + "\n" + "Class:" + getplayerClass() ;
 			
 	}
 	

@@ -111,6 +111,7 @@ public class Battle extends Inventory{
 	
 	
 	
+	
 	protected static void attack(Character target, String type){
 		
 		
@@ -118,6 +119,7 @@ public class Battle extends Inventory{
 		if (Target == "npc"){
 
 			System.out.println("Your attack: " + player.getStr() + " " + ((Enemy) target).getTypeOfEnemy() + " Defence: " + target.getDef());
+			typeAttack();
 			System.out.println("Total damage: " + target.HealthDiff(target, player)) ;
 			target.setCurHp(target.getCurHp() - target.HealthDiff(target, player) );
 			System.out.println("Opponent's health is " + target.getCurHp());
@@ -132,5 +134,26 @@ public class Battle extends Inventory{
 			System.out.println("You're current health is "+ player.getCurHp());
 			}
 		}
+	
+	public static void typeAttack(){
+		String typeAttack = player.getplayerClass();
+		switch(typeAttack){
+			case "Rogue":
+				System.out.println( player.getName() +" uses Backstab");
+				break;
+			case "Wizard":
+				System.out.println( player.getName() +" uses Pyroblast");
+				break;
+			case "Warrior":
+				System.out.println( player.getName() +" uses Brawl");
+				break;
+			case "Hunter":
+				System.out.println( player.getName() +" uses Poison Arrow");
+				break;
+				
+		}
+		
+	}
+	
 	}
 
