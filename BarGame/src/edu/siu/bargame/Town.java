@@ -10,11 +10,11 @@ public class Town extends Story {
 		player.setCurrentLocation("Town");
 	}
 	
-	public void menu() {
+	public void menu() throws Exception {
 		System.out.println("\nLocation: Ferop\n\n");
 		System.out.println("Front\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1 to enter shop district\t2 to examine location\t3 to enter treehouses\t4 to travel to a different location\t5 for story so far\t6 to view stats\n7 to view inventories\t8 Search for battles");
+		System.out.println("\n\n1:  Shop District\n2:  Examine Location\n3:  Residential Road\n4:  Travel to a Different Location\n5:  Story so Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles\n9:  Save");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -63,6 +63,11 @@ public class Town extends Story {
 		case 8:
 			Battle.battle();
 			break;
+		case 9:
+			System.out.println("Saving Game...");
+			GameSave.save("save1.save");
+			System.out.println("Game Saved.  save1.save");
+			break;
 		default:
 		}
 		if (selection != 4) {
@@ -91,7 +96,7 @@ public class Town extends Story {
 		}
 	}
 
-	private void secondaryArea() {
+	private void secondaryArea() throws Exception {
 		System.out.println("\nLocation: Ferop\n\n");
 		System.out.println("Residential Road\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());

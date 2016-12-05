@@ -10,11 +10,11 @@ public class Castle extends Story {
 		player.setCurrentLocation("Castle");
 	}
 	
-	public void menu() {
+	public void menu() throws Exception {
 		System.out.println("\nLocation: Castle\n\n");
 		System.out.println("Entry\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Visit Shop\n2:  Speak With Survivor\n3:  Travel to a different location\n4:  Story so Far\n5:  View Stats\n6:  View Inventories\n7:  Search For Battles\n8:  Castle");
+		System.out.println("\n\n1:  Visit Shop\n2:  Speak With Survivor\n3:  Travel to a different location\n4:  Story so Far\n5:  View Stats\n6:  View Inventories\n7:  Search For Battles\n8:  Castle\n9:  Save");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -72,6 +72,11 @@ public class Castle extends Story {
 					System.exit(0);
 				}
 			}
+			break;
+		case 9:
+			System.out.println("Saving Game...");
+			GameSave.save("save1.save");
+			System.out.println("Game Saved.  save1.save");
 			break;
 		default:
 		}

@@ -3,19 +3,17 @@ package edu.siu.bargame;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-public class Forest extends Story {//if issues arise, extend inventory and change how story is accessed
-	//boolean visited = false;
-	//boolean currentLocation = true;
+public class Forest extends Story {
 	
 	public Forest() {
 		player.setCurrentLocation("Forest");
 	}
 	
-	public void menu() {
+	public void menu() throws Exception {
 		System.out.println("\nLocation: Silanger\n\n");
 		System.out.println("Entrance\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Enter Shop District\n2:  Examine Location\n3:  Enter Treehouse Section\n4:  Travel To a Different Location\n5:  Story So Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles");
+		System.out.println("\n\n1:  Enter Shop District\n2:  Examine Location\n3:  Enter Treehouse Section\n4:  Travel To a Different Location\n5:  Story So Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles\n9:  Save");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -26,7 +24,7 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 			System.out.println(forestExaminations[0]);
 			break;
 		case 3:
-			secondaryArea();//treehouses
+			secondaryArea();
 			break;
 		case 4:
 			int dest;
@@ -64,6 +62,11 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 		case 8:
 			Battle.battle();
 			break;
+		case 9:
+			System.out.println("Saving Game...");
+			GameSave.save("save1.save");
+			System.out.println("Game Saved.  save1.save");
+			break;
 		default:
 		}
 		if (selection != 4) {
@@ -92,7 +95,7 @@ public class Forest extends Story {//if issues arise, extend inventory and chang
 		}
 	}
 
-	private void secondaryArea() {
+	private void secondaryArea() throws Exception {
 		System.out.println("\nLocation: Salinger\n\n");
 		System.out.println("Treehouses\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
