@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Character {
+	protected int Gold;
 	protected int level = 1;
 	protected int exp = 0;
 	protected int str;
@@ -73,6 +74,14 @@ public class Character {
 
 	public static void setHero(Character hero) {
 		player = hero;
+	}
+	
+	public int getGold() {
+		return Gold;
+	}
+
+	public void setGold(int gold) {
+		Gold = gold;
 	}
 
 	public int getLevel() {

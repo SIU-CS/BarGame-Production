@@ -40,7 +40,49 @@ public class Inventory extends Character{
 	protected void setEquipment(String[] equipment) {
 		this.equipmentItems = equipment;
 	}
-
+	protected boolean checkBItems(){
+		int i; 
+		boolean	avail=false;
+		int counter=0;
+		for(i=0; i<battleItems.length-1; i++){
+			if(battleItems[i]==null){
+				counter++;
+			} 
+		}
+		if(counter>0){ 
+		 avail=true;
+		}
+		return avail;
+	}
+	protected boolean checkKey(){
+		int i; 
+		boolean	avail=true;
+		int counter=0;
+		for(i=0; i<keyItems.length-1; i++){
+			if(keyItems[i]==null){
+				counter++;
+			} 
+		}
+		if(counter>0){ 
+		 avail=false;
+		}
+		return avail;
+	}
+	protected boolean checkEquip(){
+		int i;
+		boolean avail=true;
+		int counter=0;
+		for(i=0;i<equipmentItems.length-1;i++){
+			if(equipmentItems[i]==null){
+				counter++;
+			}
+			
+		}
+		if(counter>0){
+			avail=false;
+		}
+		return avail;
+	}
 	public String addBattleItem(String item) {
 		boolean added = false;
 		for (int i = 0; i<=battleItems.length - 1; i++) {

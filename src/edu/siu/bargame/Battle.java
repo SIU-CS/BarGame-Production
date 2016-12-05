@@ -6,7 +6,7 @@ public class Battle extends Inventory {
 	public static String Target;
 	private String items[]= {"gold","jewel","food","potion","gun"};
 	
-	protected static void battle(String enemy) {
+	protected static void battle(String enemy, Inventory x) {
 		//Enemy opponent = new Enemy(7,4,3,9);
 		Enemy opponent = Enemy.typeOfEnemy(enemy);//new Enemy(7, 4, 3, 9);
 		levelScale(player,opponent);
@@ -35,6 +35,7 @@ public class Battle extends Inventory {
 			    
 			    if (opponent.getCurHp() <= 0 ){
 			    	System.out.println();
+			    	
 			    	break;
 			    }
 			    
@@ -81,25 +82,26 @@ public class Battle extends Inventory {
 			option2(enemy);
 		}
 	}
+		Battleloot(x);
+		
 		System.out.println("Game over");
 	
 	}
-	protected void Battleloot(){
+	protected static void Battleloot(Inventory x){
 		System.out.println("Would you like to search your opponent for possible items?");
 		Scanner kb = new Scanner(System.in);
-		String opt = kb.nextLine();
 		boolean set = true;
 		boolean set2= true;
+		String ranIt= randomItem();
 		while(set==true){
-		
+			String opt = kb.nextLine();
 			if(opt.equalsIgnoreCase("yes")){
 				while(set2==true){
-				String ranIt= randomItem();
 				System.out.println("Item found: "+ranIt);
 				System.out.println("Would you like to take this item?");
 				String opt2 = kb.nextLine();
 				if(opt2.equalsIgnoreCase("yes")){
-						System.out.println("");
+						x.CheckitemType(ranIt);
 						set2=false;
 				}
 				if(opt2.equalsIgnoreCase("no")){
@@ -125,9 +127,9 @@ public class Battle extends Inventory {
 		
 	}
 	
-	protected String randomItem(){
+	protected static String randomItem(){
 		Random ran = new Random();
-		String items[]= {"gold","jewel","food","potion","gun"};
+		String items[]= {"gold","jewel","food","potion","elixir"};
 		int x= ran.nextInt(5-0);
 		return items[x];
 	}

@@ -4,16 +4,20 @@ import java.util.Scanner;
 
 public class Shop extends Inventory {
 	Random ran= new Random();
+	ShopKeeper nShkp = new ShopKeeper(30,30,30,30);
 	Scanner kb= new Scanner(System.in);
 	int battleItemPrices[] = {15,25,40};
+	
 	String battleItems[] = {"Potion","Strong Potion","Elixir"};
+	String bItemsD[]={"a weak potion with minimal health boost","a strong potion with decent health boost","The Strongest elixir with maximal health boost"};
 	
 	String keyItems[] = {"Food","Diamond"};
 	int KPrices[]={5,40};
+	String keyD[]={"Small meal for miminal health boost","An expensive gem"};
 	
 	String equipment[] = {"Leather Armor","Iron Armor","Dragon Armor"};
 	int equipPrices[] = {50,75,100};
-	
+	String equipD[]={"Weak armor but will help in battle","Strong sturdy armor","Rare armor seems to be unknown origin"};
 	
 	protected void displayBItems(){ 
 		for(int i= 0; i<3; i++){
@@ -21,7 +25,7 @@ public class Shop extends Inventory {
 		}
 	}
 	protected void displayKItems(){
-		for(int i= 0; i<3; i++){
+		for(int i= 0; i<2; i++){
 			System.out.println(KPrices[i]+" gold: "+keyItems[i]);
 		}
 	}
@@ -39,55 +43,102 @@ public class Shop extends Inventory {
 	protected void brawl(Character x, ShopKeeper y){
 		boolean brawling=true;
 		while(brawling==true){
-		int i= 0;
-		System.out.println("Connected on a punch to the shop keeper, several more shots and he will be KO'd");
-		int g = brawlGen();
-		if(g>=5){
-			y.setHp(y.getHp()-5);
+		y.setCurHp(y.getCurHp()-1);
+		System.out.println("ShopKeeper hp: "+y.getCurHp());
+		if(y.getCurHp()<=5){
+			System.out.println("you win");
+			brawling =false;
 		}
-		else
-			System.out.println("Weak attack on Shop keeper, virtually no damage way to be a wimp");
-				y.setHp(y.getHp()-1);
+		x.setCurHp(x.getCurHp()-1);
+		System.out.println("Your hp: "+x.getCurHp());
+		if(x.getCurHp()<=5){
+			System.out.println("you lose");
+			brawling=false;
 		}
-		int j= brawlGen();
-		if(j>=5){
-			System.out.println("Shop Keeper landed several combos on you, decent damage");
-			x.setCurHp(x.getCurHp()-5);
 		
-		}
-		else
-			System.out.println("Shop keep landed some punches but no significant damage");
-			x.setCurHp(x.getCurHp()-1));
-			
-			
-			
 	}
+		y.setCurHp(30);
+		System.out.println(y.getCurHp());
+	}
+	
 	protected int brawlGen(){
 		int x= ran.nextInt(10-1+1)+1;
+		return x;
+	}
+	protected void sellItem(Character x){
 		
 	}
-	proteacted void sellItem(Character x){
-		
-	}
-	protected void Shopping(Character x){
+	protected void Shopping(Character x, Inventory q){
 		boolean open=true;
+		boolean BN=true;
 		System.out.println("Welcome to the general store!\n feel free to look at our items or purchase any of our items.");
-		System.out.println("To view items for sale press view, to buy items press 2, to sell items in your inventory type sell,n  to attempt to steal an item press 3.");
-		String opt= kb.nextLine();
+		
+		boolean open2=true;
+		boolean space=true;
 		while(open==true){
+			System.out.println("To view items for sale press view\n\nto buy items type buy\n\n to sell items in your inventory type sell\n\nto attempt to steal an item press 3.");
+			String opt= kb.nextLine();
 				if(opt.equalsIgnoreCase("View")){
+				
 					displayShopItems();
+					
 				}
 				if(opt.equalsIgnoreCase("Buy")){
 					displayShopItems();
-					System.out.println("What item would you like to buy?");
+					System.out.println("What type of item would you like to buy?\nType 1 for key items\nType 2 for Battle items\nType 3 for equipment");
+					
+					int buying= kb.nextInt();
+					if(buying==1){
+						displayKItems();
+						System.out.println("what item would you like to purchase");
+						displayKItems();  
+						System.out.println("1 for food, 2 for diamond");
+						int item = kb.nextInt();
+						space=q.checkBItems();
+						if(space==false){
+							System.out.println("insufficient space in inventory please come back when space is free");
+							open=false;
+						}
+						else
+							q.addKeyItem(keyItems[item-1]);
+							
+					}
+					if(buying==2){
+						displayBItems();
+						System.out.println("what item would you like to purchase");
+						System.out.println("1 for potion, 2 for strong potion, 3 for elixir");
+						int item=kb.nextInt();
+						space=q.checkBItems();
+						if(space==false){
+							System.out.println("insufficient space in inventory please come back when space is free");
+							open=false;
+						}
+						else 
+							q.addBattleItem(battleItems[item-1]);
+						open=false;
+					}
+					if(buying==3){
+						displayEquip();
+						System.out.println("what item would you like to purchase");
+						displayKItems();
+						System.out.println("1 for Leather Armor, 2 for Iron Armor, 3 for Dragon Armor");
+						int item = kb.nextInt();
+						space=q.checkBItems();
+						if(space==false){
+							System.out.println("insufficient space in inventory please come back when space is free");
+							open=false;
+						} 
+						else	
+							q.addEquipment(equipment[item-1]);
+					}
+					
 				}
 				if(opt.equalsIgnoreCase("Steal")){
-					//call steal method which includes random but highly likely event of getting caught and brawl
+					steal(x);
+					open=false;
 				}
-				else
+				else if( !opt.equalsIgnoreCase("steal")||!opt.equalsIgnoreCase("buy")||!opt.equalsIgnoreCase("sell")||!opt.equalsIgnoreCase("view"))
 					System.out.println("Please enter a valid response");
-			
 		}
 	}
 	private void displayShopItems() {
@@ -95,8 +146,12 @@ public class Shop extends Inventory {
 		displayKItems();
 		displayEquip();
 	}
+	protected void Charge(Character x, int y){
+		x.setGold(x.getGold()-y);
+	}
 	
 	protected void steal(Character x){
+		boolean win;
 		//make sure it checks inventory available space, allows user to remove item if necessary or try to resell it to the shop keeper 
 		String stolen;
 		System.out.println("The shop keeper isn't looking would you like to try and steal an item?");
@@ -110,38 +165,43 @@ public class Shop extends Inventory {
 		}
 		else if(val<=90){
 			System.out.println("Theft attempt unsuccesful");
-			ShopKeeper nShkp = new ShopKeeper(x.getCurHp(),x.getStr(),x.getDef());
-			System.out.println("Now engaged in a brawl with the Shop Keeper, square up");
-			while (x.getCurHp()>10 || nShkp.getHp()>10){
-				brawl(Character x, ShopKeeper y);
+			System.out.println("Now engaged in a brawl with the Shop Keeper");
+			boolean fighting = true;
+				brawl( x, nShkp);
 			}
 			
 		}
-		
-		
-	}
+
 	protected int rand(){
 		int x= ran.nextInt(100-1+1)+1;
 		return x;
 	} 
 	
-	
-	
-	
+	 
 }
-class ShopGaurd{
-	
-}
+
 class ShopKeeper{
 	int hp;
 	int str;
 	int def;
-	
-	public ShopKeeper(int health, int strength, int defense ){
+	int CurHp;
+	public ShopKeeper(int health,int curHp, int strength, int defense ){
 		hp=health;
 		str=strength;
 		def=defense;
+		CurHp=curHp;
 	}
+	
+
+	public int getCurHp() {
+		return CurHp;
+	}
+
+
+	public void setCurHp(int curHp) {
+		CurHp = curHp;
+	}
+
 
 	public int getHp() {
 		return hp;
