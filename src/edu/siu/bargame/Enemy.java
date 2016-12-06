@@ -4,9 +4,7 @@ import java.util.Scanner;
 public class Enemy extends Character {
 	
 	
-	public EnemyInventory(String [] items){
-		this.items=items;
-	}
+
 	
 	protected int hp;
 	protected int strength;
