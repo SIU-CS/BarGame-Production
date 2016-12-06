@@ -22,6 +22,16 @@ public class PvPBattle extends Inventory{
 			while(x.getCurHp() >= 0 || y.getCurHp() >=0){
 				battleOptions(x,y);
 				battleOptions(y,x);
+				if(x.getCurHp()==0){
+					System.out.println(y.getName()+" has won. gold won: "+x.getGold());
+					y.setGold(y.getGold()+x.getGold());
+					x.setGold(0);
+				}
+				if(y.getCurHp()==0){
+					System.out.println(x.getName()+" has won. gold won: "+y.getGold());
+					x.setGold(x.getGold()+y.getGold());
+					y.setGold(0);
+				}
 		}
 		}
 		if(q==2){
@@ -29,7 +39,18 @@ public class PvPBattle extends Inventory{
 			while(x.getCurHp() >= 0 || y.getCurHp() >=0){
 				battleOptions(y,x);
 				battleOptions(x,y);
+				if(x.getCurHp()==0){
+					System.out.println(y.getName()+" has won. gold won: "+x.getGold());
+					y.setGold(y.getGold()+x.getGold());
+					x.setGold(0);
+				}
+				if(y.getCurHp()==0){
+					System.out.println(x.getName()+" has won. gold won: "+y.getGold());
+					x.setGold(x.getGold()+y.getGold());
+					y.setGold(0);
+				}
 		}
+			
 		}
 		
 		
