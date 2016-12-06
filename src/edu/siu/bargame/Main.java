@@ -10,17 +10,17 @@ public class Main {
 		
 		
 		
-		Shop myShop = new Shop();
-		Character player = new Character(7,10,10);
-		player.createCharacter();
-		player.setHero(player);
-		Inventory inventory = new Inventory();
-		inventory.setStartItems();
-		player.setGold(500);
-		//myShop.Shopping(player, inventory);
+		//Shop myShop = new Shop();
+		//Character player = new Character(7,10,10);
+	//	player.createCharacter();
+	//	player.setHero(player);
+	//	Inventory inventory = new Inventory();
+	//	inventory.setStartItems();
+	//	player.setGold(500);
+	//	myShop.Shopping(player, inventory);
 		
 		
-		inventory.printBattleItems();
+		//inventory.printBattleItems();
 		
 		
 		
@@ -42,7 +42,7 @@ public class Main {
 	    //inventory.printEquipment();
 	    //inventory.printKeyItems();
 		
-			Battle.battle("Undead",inventory);
+			//Battle.battle("Undead",inventory);
 		//Battle.battle("Mercenary");
 		//Battle.battle("Boss");
 		//Battle.attack(opponent);

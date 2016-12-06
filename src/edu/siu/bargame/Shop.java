@@ -6,8 +6,8 @@ public class Shop extends Inventory {
 	Random ran= new Random();
 	ShopKeeper nShkp = new ShopKeeper(30,30,30,30);
 	Scanner kb= new Scanner(System.in);
-	int battleItemPrices[] = {15,25,40};
 	
+	int battleItemPrices[] = {15,25,40};
 	String battleItems[] = {"Potion","Strong Potion","Elixir"};
 	String bItemsD[]={"a weak potion with minimal health boost","a strong potion with decent health boost","The Strongest elixir with maximal health boost"};
 	
@@ -46,13 +46,14 @@ public class Shop extends Inventory {
 		y.setCurHp(y.getCurHp()-1);
 		System.out.println("ShopKeeper hp: "+y.getCurHp());
 		if(y.getCurHp()<=5){
-			System.out.println("you win");
+			System.out.println("you win, but are unable to get away with the item");
 			brawling =false;
 		}
 		x.setCurHp(x.getCurHp()-1);
 		System.out.println("Your hp: "+x.getCurHp());
 		if(x.getCurHp()<=5){
-			System.out.println("you lose");
+			System.out.println("you lose, shopkeeper takes all your gold");
+			x.setGold(0);
 			brawling=false;
 		}
 		
@@ -61,10 +62,7 @@ public class Shop extends Inventory {
 		System.out.println(y.getCurHp());
 	}
 	
-	protected int brawlGen(){
-		int x= ran.nextInt(10-1+1)+1;
-		return x;
-	}
+	
 	protected void sellItem(Character x){
 		
 	}
@@ -72,38 +70,57 @@ public class Shop extends Inventory {
 		boolean open=true;
 		boolean BN=true;
 		System.out.println("Welcome to the general store!\n feel free to look at our items or purchase any of our items.");
-		
+		boolean buy=true;
 		boolean open2=true;
 		boolean space=true;
 		while(open==true){
-			System.out.println("To view items for sale press view\n\nto buy items type buy\n\n to sell items in your inventory type sell\n\nto attempt to steal an item press 3.");
+			System.out.println("To view items for sale press view\n\nto buy items type buy\n\nto sell items in your inventory type sell\n\nto attempt to steal an type steal\n"
+					+ "\n\nto exit type exit");
 			String opt= kb.nextLine();
 				if(opt.equalsIgnoreCase("View")){
-				
 					displayShopItems();
-					
 				}
 				if(opt.equalsIgnoreCase("Buy")){
+					while(buy==true){
 					displayShopItems();
 					System.out.println("What type of item would you like to buy?\nType 1 for key items\nType 2 for Battle items\nType 3 for equipment");
-					
 					int buying= kb.nextInt();
 					if(buying==1){
+						boolean menu=false;
+						while(menu==false){
 						displayKItems();
 						System.out.println("what item would you like to purchase");
 						displayKItems();  
 						System.out.println("1 for food, 2 for diamond");
+						
 						int item = kb.nextInt();
 						space=q.checkBItems();
 						if(space==false){
 							System.out.println("insufficient space in inventory please come back when space is free");
+							menu=true;
+							buy=false;
+							open=false;
+						}
+						else if(x.getGold()<KPrices[item-1]){
+							System.out.println("Please come back when you have sufficient gold");
+							menu = true;
+							buy=false;
 							open=false;
 						}
 						else
+							System.out.println("item purchased, please come again");
 							q.addKeyItem(keyItems[item-1]);
+							int y=KPrices[item-1];
+							x.setGold(x.getGold()-y);
+							menu=true;
+							buy=false;
+							open=false;
+						}
 							
 					}
 					if(buying==2){
+						boolean menu2=false;
+						while(menu2==false){
 						displayBItems();
 						System.out.println("what item would you like to purchase");
 						System.out.println("1 for potion, 2 for strong potion, 3 for elixir");
@@ -111,13 +128,29 @@ public class Shop extends Inventory {
 						space=q.checkBItems();
 						if(space==false){
 							System.out.println("insufficient space in inventory please come back when space is free");
+							menu2=true;
+							buy=false;
 							open=false;
 						}
-						else 
+						else if(x.getGold()<battleItemPrices[item-1]){
+							System.out.println("Please come back when you have sufficient funds");
+							menu2=true;
+							buy=false;
+							open=false;
+						}
+						else
+							
 							q.addBattleItem(battleItems[item-1]);
-						open=false;
+							x.setGold(x.getGold()-battleItemPrices[item-1]);
+							menu2=true;
+							buy=false;
+							open=false;
+						}
+						
 					}
 					if(buying==3){
+						boolean menu3=false;
+						while(menu3==false){
 						displayEquip();
 						System.out.println("what item would you like to purchase");
 						displayKItems();
@@ -127,28 +160,46 @@ public class Shop extends Inventory {
 						if(space==false){
 							System.out.println("insufficient space in inventory please come back when space is free");
 							open=false;
+							buy=false;
+							open=false;
 						} 
-						else	
+						else if(x.getGold()<equipPrices[item-1]){
+							System.out.println("please come back when you have sufficient funds");
+							menu3=true;
+							buy=false;
+							open=false;
+						}
+						else
+							System.out.println("item purchased, please come again");
 							q.addEquipment(equipment[item-1]);
+							menu3=true;
+							buy=false;
+							open=false;
+					}
 					}
 					
+				}
+				if(opt.equalsIgnoreCase("sell")){
+					System.out.println("What item would you like to sell?");
+					String selling=kb.nextLine();
 				}
 				if(opt.equalsIgnoreCase("Steal")){
 					steal(x);
 					open=false;
 				}
-				else if( !opt.equalsIgnoreCase("steal")||!opt.equalsIgnoreCase("buy")||!opt.equalsIgnoreCase("sell")||!opt.equalsIgnoreCase("view"))
-					System.out.println("Please enter a valid response");
+				if(opt.equalsIgnoreCase("Exit")){
+					open=false;
+				}
+				}
+			
 		}
-	}
+	}//if( !opt.equalsIgnoreCase("steal")||!opt.equalsIgnoreCase("buy")||!opt.equalsIgnoreCase("sell")||!opt.equalsIgnoreCase("view")||!opt.equalsIgnoreCase("exit")
 	private void displayShopItems() {
 		displayBItems();
 		displayKItems();
 		displayEquip();
 	}
-	protected void Charge(Character x, int y){
-		x.setGold(x.getGold()-y);
-	}
+	
 	
 	protected void steal(Character x){
 		boolean win;
