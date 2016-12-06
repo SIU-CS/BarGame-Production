@@ -10,17 +10,28 @@ public class PvPBattle extends Inventory{
 	
 	protected void BattlePrompt(){
 		System.out.println("enemy name has challenged you to a battle and you cannot escape");
-		System.out.println("The Player with the highest Strength will attack first");
+		System.out.println("The Player with the highest Strength will attack first, or if equal will be chosen at random");
 		
 	}
 	protected void PlayerBattle(Character x, Character y){
 		
 		BattlePrompt();
-		boolean battle = true;
-		PlayerStart(x,y); 
-		while(x.getCurHp() >= 0 || y.getCurHp() >=0){
-			
+		int q=PlayerStart(x,y);
+		if(q==1){
+			System.out.println(x.getName()+"will attack first"); 
+			while(x.getCurHp() >= 0 || y.getCurHp() >=0){
+				battleOptions(x,y);
+				battleOptions(y,x);
 		}
+		}
+		if(q==2){
+			System.out.println(y.getName()+"will attack first");
+			while(x.getCurHp() >= 0 || y.getCurHp() >=0){
+				battleOptions(y,x);
+				battleOptions(x,y);
+		}
+		}
+		
 		
 	}
 	protected void attack(Character x, Character y){
@@ -46,20 +57,23 @@ public class PvPBattle extends Inventory{
 					String item = battleItem.next();
 					useItem(item);
 				}
+				else
+					System.out.println("Please enter valid response");
 			}
 		
 	}
     	
-	protected void PlayerStart(Character x, Character y){
+	protected int PlayerStart(Character x, Character y){
+		int start;
 		int strn1= x.getStr();
 		int strn2= y.getStr();
 		if(strn1>strn2){
 			System.out.println(x.getName()+"will attack first"); 
-			attack(x, y);
+			start=1;
 		}
 		else if(strn2>strn1){
 			System.out.println(y.getName()+"will attack first");
-			attack(y,x);
+			start=2;
 		}
 		else{
 			System.out.println("Will be chosen at random");
@@ -68,13 +82,14 @@ public class PvPBattle extends Inventory{
 			int rand= ranGen();
 			if(p1==rand){
 				System.out.println(x.getName()+"will attack first");
-				attack(x,y);
+				start=1;
 				
 			}
 			else
 				System.out.println(y+"will attack first");
-				attack(y,x);
+				start=2;
 		}
+		return start;
 	}
 	
 	protected int ranGen(){
