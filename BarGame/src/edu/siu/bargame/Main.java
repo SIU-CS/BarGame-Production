@@ -1,73 +1,71 @@
 package edu.siu.bargame;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
-	
-/*		Character player = new Character(5, 4, 10);
+		
+/*		Character player = new Character(4, 4, 5);
 		player.createCharacter();
 		player.setHero(player);
-		
-		System.out.println(Story.story[0]);
-		System.out.println(player.PrintStats() + "\n");
-		System.out.println(player.toString() + "\n");
-
 		Inventory inv = new Inventory();
 		inv.setStartItems();
-		Inventory.printBattleItems();
-		inv.printKeyItems();
-		inv.printEquipment();*/
-		
-		/*GameSave.save("save1.txt");
-		GameSave.load("save1.txt");
-		
-		inv.addBattleItem("Test");
-		Inventory.removeBattleItem("potion");
-		player.setLevel(50);
-		player.setCurHp(2);
-		player.setStr(15);
-		
-		GameSave.save("save1.txt");
-		GameSave.load("save1.txt");
-		
-		System.out.println(player.PrintStats() + "\n");
-		System.out.println(player.toString() + "\n");
-		Inventory.printBattleItems();
-		inv.printKeyItems();
-		inv.printEquipment();
-		
-		Battle.battle("Soldier");*/
-		//Forest forest = new Forest();
-		//forest.menu();
-		//player.setLevel(3);
-		//Battle.battle();
+		player.PrintStats();
+		GameSave.save();
+		GameSave.load();
+		player.PrintStats();*/
 		
 		
+		/*System.out.println("Would you like to load a previously-saved game?  Yes or No");
+		Scanner load = new Scanner (System.in);
+		String loadChoice = load.nextLine();
+		if (loadChoice.equalsIgnoreCase("yes")) {
+			GameSave.load();
+		}*/
 		
+	 	Character player = new Character(2, 2, 2);
+	 	player.createCharacter();
+	 	player.setHero(player);
+	 	System.out.println("");
+	 	System.out.println(player + "");
+	 	Inventory inv = new Inventory();
+	 	inv.setStartItems();
+		System.out.println(Story.story[0]);
+	 	MenuUI UInterface = new MenuUI();
 
-	 				MenuUI UInterface = new MenuUI();
-	 				Character player = new Character(2, 2, 2);
-	 				player.createCharacter();
-	 				System.out.println("");
-	 				System.out.println(player + "");
-	 				Inventory inv = new Inventory();
-	 				inv.setStartItems();
-	 				
-	 				Boolean game = true;
-	 				
-	 				while (game) {
-	 					int temp = 0;
-	 					UInterface.Interface();
-	 					temp = UInterface.getChoice();
+	 	Boolean game = true;
+		while (game) {
+			int temp = 0;
+	 		UInterface.Interface();
+	 		temp = UInterface.getChoice();
 
-			switch (temp) 
-{
+			switch (temp) {
 				case 1:
-					// Converse with nearby npc's
-					// Explore surrounding
-					// Can put any enemy we want here 
-					Battle.battle();
+					System.out.println("Where would you like to go?\n\nSalinger\n");
+					if (player.getTownVisited()) {
+						System.out.println("Ferop\n");
+					}
+					if (player.getCastleVisited()) {
+						System.out.println("Castle\n\n");
+					}
+					Scanner locale = new Scanner(System.in);
+					String area = locale.next();
+					if (area.equalsIgnoreCase("salinger")) {
+						Forest forest = new Forest();
+						forest.menu();
+					}
+					else if (area.equalsIgnoreCase("ferop")) {
+						Town town = new Town();
+						town.menu();
+					}
+					else if (area.equalsIgnoreCase("castle")) {
+						Castle castle = new Castle();
+						castle.menu();
+					}
+					else {
+						System.out.println("Invalid location entered");
+					}
 					break;
 				case 2:
 					inv.printBattleItems();
@@ -78,16 +76,18 @@ public class Main {
 					System.out.println(player.PrintStats());
 					break;
 				case 4:
-					//game save
+					Battle.battle();
 					break;
 				case 5:
-					game = false;
-					System.out.println("Game Over, thanks for playing. ");
+					System.out.println("Saving Game...");
+					GameSave.save();
+					System.out.println("Game Saved.");
 					break;
-	 				}
-	 				
-	 		 		
-	 		 		
+				case 6:
+					game = false;
+					System.out.println("Thanks for playing! ");
+					break;
+				}	
+			}
+		}
 	}
-}
-}

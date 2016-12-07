@@ -5,6 +5,16 @@ import java.util.Scanner;
 
 public class Character {
 	
+	protected int gold = 200;
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+
 	protected int level = 1;
 	protected int exp = 0;
 	protected int str;

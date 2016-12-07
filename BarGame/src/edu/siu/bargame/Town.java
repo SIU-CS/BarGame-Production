@@ -6,15 +6,15 @@ import java.util.Scanner;
 public class Town extends Story {
 	
 	public Town() {
-		player.setTownVisited(true);
+		
 		player.setCurrentLocation("Town");
 	}
 	
-	public void menu() throws Exception {
+	public void menu() {
 		System.out.println("\nLocation: Ferop\n\n");
 		System.out.println("Front\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Shop District\n2:  Examine Location\n3:  Residential Road\n4:  Travel to a Different Location\n5:  Story so Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles\n9:  Save");
+		System.out.println("\n\n1:  Shop District\n2:  Examine Location\n3:  Residential Road\n4:  Story so Far\n5:  View Stats\n6:  View Inventories\n7:  Overworld");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -25,58 +25,35 @@ public class Town extends Story {
 			System.out.println(townExaminations[0]);
 			break;
 		case 3:
-			secondaryArea();//residential road
+			secondaryArea();
 			break;
+		
 		case 4:
-			int dest;
-			if (player.forestVisited) {
-				System.out.println("Would you like to travel to Salinger?  Press 1 for yes and 2 for no.");
-				Scanner travel = new Scanner(System.in);
-				dest = travel.nextInt();
-				if (dest == 1) {
-					Forest forest = new Forest();
-					forest.menu();
-				}
-			}
-			if (player.castleVisited) {
-				System.out.println("Would you like to travel to the Capital?  Press 1 for yes and 2 for no.");
-				Scanner travel = new Scanner(System.in);
-				dest = travel.nextInt();
-				if (dest == 1) {
-					Castle castle = new Castle();
-					castle.menu();
-				}
-			}
-			break;
-		case 5:
 			for (int i = 0; i < getStoryCounter(); i++) {
 				System.out.println(story[i]);
 				System.out.println("\n\n");
 			}
 			break;
-		case 6:
+		case 5:
 			System.out.println(player.toString() + "\n" + player.PrintStats());
 			break;
-		case 7:
+		case 6:
 			inventoryMenu();
 			break;
-		case 8:
-			Battle.battle();
-			break;
-		case 9:
-			System.out.println("Saving Game...");
-			GameSave.save("save1.save");
-			System.out.println("Game Saved.  save1.save");
+		case 7:
+			System.out.println("Returning to the Overworld...");
 			break;
 		default:
-		}
-		if (selection != 4) {
+				
+		if (selection != 7) {
 			menu();
 		}
+		}
+			
 	}
 
 	private void inventoryMenu() {
-		System.out.println("\n\n1:  Check Equipment\n2:  Check Key Items\n3:  Check Battle Items");
+		System.out.println("\n\n1:  Check Equipment\n2:  Check Key Items\n3:  Check Battle Items\n4:  Exit Menu");
 		Scanner menuChoice = new Scanner(System.in);
 		int menuSelection = menuChoice.nextInt();
 		switch (menuSelection) {
@@ -92,11 +69,13 @@ public class Town extends Story {
 			Scanner invItem = new Scanner(System.in);
 			String item = invItem.next();
 			useItem(item);
+		case 4:
+			break;
 		default:
 		}
 	}
 
-	private void secondaryArea() throws Exception {
+	private void secondaryArea() {
 		System.out.println("\nLocation: Ferop\n\n");
 		System.out.println("Residential Road\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
@@ -133,8 +112,8 @@ public class Town extends Story {
 					System.out.println(story[2]);
 					setStoryCounter(getStoryCounter() + 1);
 					Battle.bossBattle();
-					Castle castle = new Castle();
-					castle.menu();
+					player.setCastleVisited(true);
+					System.out.println("You can now visit the Castle.  Go to the Overworld and try it out!");
 				}
 			}
 			break;
@@ -165,7 +144,6 @@ public class Town extends Story {
 			break;
 		case 3:
 			System.out.println(townConversations[3]);
-			//if inventory for sidequest, get book
 			conversationMenu();
 			break;
 		case 4:

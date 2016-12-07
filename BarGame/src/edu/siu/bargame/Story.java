@@ -21,12 +21,12 @@ public class Story extends Inventory{
 	public void setStoryCounter(int storyCounter) {
 		this.storyCounter = storyCounter;
 	}
-	protected static String townConversations[] = {/*woman, man, professor*/"\"Hey, how can I help you?  Why, this town here was spared in the war thanks to the ceasefire, but it sure was close.  Lotsa people hate us though, shame.  "
+	protected static String townConversations[] = {"\"Hey, how can I help you?  Why, this town here was spared in the war thanks to the ceasefire, but it sure was close.  Lotsa people hate us though, shame.  "
 			+ "They blame us Ferop for a lot in the war, despite us not participating.  Our neighborin' city, or I ought say former neighborin' city, Icclea, God rest their souls, had the same militia uniforms as us, so people have been mistaking us for them.  They were all wiped"
 			+ "out in that awful war.  I wish peace could return again for good...I'm scared that someone may get the idea of revenge and start things up again, which would be bad for everybody, involved or not.\"", "\"Good day to you!  "
 					+ "We're situated out here with a mountain behind us, a swamp north of us, and a winding maze of a forest to the east.  Thanks to that, we were spared the ravages of war.  The Icclea, though...best not to dwell on it.  "
-					+ "I heard that a merchant in town is selling a machete.  Something like that could help someone travel through the swamp!\"", "Hello, chap.  I have a proposition for you.  I'm a professor of biology.  I have here a book "
-					+ "of great value.  But, er, I can't exactly read it.  It's in an old language and I can't identify it, nor can my colleagues, it's that old.  You can have it if you bring me five Undead Bones.  Who knows, you may find more use for it than I.  Come back when you have the bones!"};
+					+ "I heard that a merchant in town is selling a machete.  Something like that could help someone travel through the swamp!\"", "Hello, chap.  I'm a student of Biology as 't were.  Funnily enough, I found this book inside an Undead I was studying!"
+					+ "  But, er, I can't exactly read it.  It's in an old language and I can't identify it.  Biology is my major, not language!"};
 	
 	
 	protected static String castleConversations[] = {"\"Fie!  The castle can't be retaken!  A dragon roosts upon this fortress!  I entered with a band of fellow countrymen to slay the beast, but only I survived, and by the luck of the Gods!  Friend, turn back now.  This place"

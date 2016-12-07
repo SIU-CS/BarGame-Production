@@ -135,14 +135,14 @@ public class Inventory extends Character {
 		}
 	}
 	
-	public void printKeyItems() {
+	public static void printKeyItems() {
 		for (int i = 0; i < keyItems.length - 1; i++) {
 			if(keyItems[i] != null)
 			System.out.println(keyItems[i] + "\n");
 		}
 	}
 	
-	public void printEquipment() {
+	public static void printEquipment() {
 		for (int i = 0; i <= equipmentItems.length - 1; i++) {
 			if(equipmentItems[i] != null)
 			System.out.println(equipmentItems[i] + "\n");
@@ -171,7 +171,10 @@ public class Inventory extends Character {
 				removeBattleItem(item);
 				break;
 			case "Great Potion":
-				player.setCurHp(player.getCurHp()+60);
+				player.setCurHp(player.getCurHp()+25);
+				if (player.getCurHp() > player.getMaxHp()) {
+					player.setCurHp(player.maxHp);
+				}
 				System.out.println(player.getCurHp());
 				break;
 			case "Max Potion":
@@ -186,7 +189,6 @@ public class Inventory extends Character {
 	}
 	
 	public void equipBonus() {
-		//String head, torso, leggings, boots, weapon;//leather, iron, steel, blessed\\wooden, iron, steel, blessed
 		switch (equipmentItems[0]) {
 			case "leather":
 				player.setDef(player.getDef()+2);

@@ -9,11 +9,11 @@ public class Forest extends Story {
 		player.setCurrentLocation("Forest");
 	}
 	
-	public void menu() throws Exception {
+	public void menu() {
 		System.out.println("\nLocation: Silanger\n\n");
 		System.out.println("Entrance\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
-		System.out.println("\n\n1:  Enter Shop District\n2:  Examine Location\n3:  Enter Treehouse Section\n4:  Travel To a Different Location\n5:  Story So Far\n6:  View Stats\n7:  View Inventories\n8:  Search for Battles\n9:  Save");
+		System.out.println("\n\n1:  Enter Shop District\n2:  Examine Location\n3:  Enter Treehouse Section\n4:  Story So Far\n5:  View Stats\n6:  View Inventories\n7:  Overworld");
 		Scanner choice = new Scanner(System.in);
 		int selection = choice.nextInt();
 		switch (selection) {
@@ -26,56 +26,31 @@ public class Forest extends Story {
 		case 3:
 			secondaryArea();
 			break;
+
 		case 4:
-			int dest;
-			if (player.townVisited) {
-				System.out.println("Would you like to travel to Ferop?  Press 1 for yes and 2 for no.");
-				Scanner travel = new Scanner(System.in);
-				dest = travel.nextInt();
-				if (dest == 1) {
-					Town town = new Town();
-					town.menu();
-				}
-			}
-			if (player.castleVisited) {
-				System.out.println("Would you like to travel to the Capital?  Press 1 for yes and 2 for no.");
-				Scanner travel = new Scanner(System.in);
-				dest = travel.nextInt();
-				if (dest == 1) {
-					Castle castle = new Castle();
-					castle.menu();
-				}
-			}
-			break;
-		case 5:
 			for (int i = 0; i < getStoryCounter(); i++) {
 				System.out.println(story[i]);
 				System.out.println("\n\n");
 			}
 			break;
-		case 6:
+		case 5:
 			System.out.println(player.toString() + "\n" + player.PrintStats());
 			break;
-		case 7:
+		case 6:
 			inventoryMenu();
 			break;
-		case 8:
-			Battle.battle();
-			break;
-		case 9:
-			System.out.println("Saving Game...");
-			GameSave.save("save1.save");
-			System.out.println("Game Saved.  save1.save");
-			break;
+		case 7:
+			System.out.println("Returning to the Overworld...");
+		
 		default:
 		}
-		if (selection != 4) {
+		if (selection != 7) {
 			menu();
 		}
 	}
 
 	private void inventoryMenu() {
-		System.out.println("\n\n1:  Check Equipment\n2:  Check Key Items\n3:  Check Battle Items");
+		System.out.println("\n\n1:  Check Equipment\n2:  Check Key Items\n3:  Check Battle Items\n4:  Exit Menu");
 		Scanner menuChoice = new Scanner(System.in);
 		int menuSelection = menuChoice.nextInt();
 		switch (menuSelection) {
@@ -91,11 +66,13 @@ public class Forest extends Story {
 			Scanner invItem = new Scanner(System.in);
 			String item = invItem.next();
 			useItem(item);
+		case 4:
+			break;
 		default:
 		}
 	}
 
-	private void secondaryArea() throws Exception {
+	private void secondaryArea() {
 		System.out.println("\nLocation: Salinger\n\n");
 		System.out.println("Treehouses\n\n\n");
 		System.out.println("              Name: "+ player.getName() + "----------Level "+player.getLevel()+ "----------Hp: " + player.getCurHp() + "/" + player.getMaxHp());
@@ -132,8 +109,8 @@ public class Forest extends Story {
 					System.out.println(story[1]);
 					setStoryCounter(getStoryCounter() + 1);
 					Battle.bossBattle();
-					Town town = new Town();
-					town.menu();
+					player.setTownVisited(true);
+					System.out.println("You can now visit Ferop.  Go to the Overworld and try it out!");
 				}
 			}
 			break;

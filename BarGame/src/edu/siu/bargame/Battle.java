@@ -3,7 +3,8 @@ import java.util.Random;
 import java.util.Scanner;
 public class Battle extends Inventory{
 
-	public static String Target;
+	protected static String Target;
+	private String items[]= {"gold","jewel","food","potion","gun"};
 	
 	protected static void battle() {
 		Enemy opponent = Enemy.typeOfEnemy();
@@ -54,7 +55,7 @@ public class Battle extends Inventory{
 				System.exit(0);
 				
 			}
-			//
+			//battleLoot(x);
 			//drops, gold,
 			player.setExp(player.getExp() + opponent.getExpGiven());
 			player.levelUp();
@@ -82,12 +83,57 @@ public class Battle extends Inventory{
 		}
 	}
 	}
-
-
-
+/*
+	private static void battleLoot(Inventory x) {
+		System.out.println("Would you like to search your opponent for possible items?");
+		Scanner kb = new Scanner(System.in);
+				boolean set = true;
+				boolean set2= true;
+				String ranIt= randomItem();
+				while(set==true){
+					String opt = kb.nextLine();
+					if(opt.equalsIgnoreCase("yes")){
+						while(set2==true){
+						System.out.println("Item found: "+ranIt);
+						System.out.println("Would you like to take this item?");
+						String opt2 = kb.nextLine();
+						if(opt2.equalsIgnoreCase("yes")){
+								x.checkItemType(ranIt);
+								set2=false;
+						}
+						if(opt2.equalsIgnoreCase("no")){
+							set2=false;
+							
+						}
+						else{
+							System.out.println("Please enter a valid response");
+						}
+						}
+						
+					}
+					if(opt.equalsIgnoreCase("no")){
+						System.out.println("back to exploring area");
+						set=false;
+					}
+					else{
+						System.out.println("Please enter a valid response");
+					}
+					
+				}
+				
+				
+			}
+			
+			protected static String randomItem(){
+				Random ran = new Random();
+				String items[]= {"gold","jewel","food","potion","elixir"};
+				int x= ran.nextInt(5-0);
+				return items[x];
+			}
+*/
 	private static void option2(Enemy enemy) {
 		printBattleItems();
-		System.out.println("Enter the name of the item you want to use.  Enter exit to return to the previous screen.");//method to use item
+		System.out.println("Enter the name of the item you want to use.  Enter exit to return to the previous screen.");
 		Scanner battleItem = new Scanner(System.in);
 		String item = battleItem.next();
 		useItem(item);
@@ -95,7 +141,7 @@ public class Battle extends Inventory{
 	
 	
 	
-	protected static void attack(Character target, String type){//If you or enemy lose remaining hp after attack, terminate battle as necessary THEN
+	protected static void attack(Character target, String type){
 		
 		
 		Target = type;

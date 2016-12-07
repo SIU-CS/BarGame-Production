@@ -44,8 +44,7 @@ public class Enemy extends Character {
 		this.def = def;
 	}
 	
-	public static Enemy typeOfEnemy(/*String type*/) {//Need to change from this pseudorandom, generates same result (soldier, undead) every time called.  Try Random object?
-		//typeValue = type;
+	public static Enemy typeOfEnemy() {
 		int scale;
 		Random random = new Random();
 		if (player.getCurrentLocation() == "Forest") {
