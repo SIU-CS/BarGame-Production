@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="runjunit" name="Bargame Production">
 	<target name="runjunit" depends="compile">
-		<junit printsummary="on">
+		<junit printsummary="on" filtertrace="no"  haltonfailure="no" showoutput="yes">
+			<formatter type="plain" usefile="false" />
 			<test name="edu.siu.test.InventoryTest"/>
 			<test name="edu.siu.test.EnemyTest"/>
 			<test name="edu.siu.test.CharacterTest"/>
