@@ -4,9 +4,10 @@
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="main-class" value="edu.siu.pacman.Main" />
+	
 	<target name="clean">
 		<delete dir="${build.dir}" />
-	</target>
+	</target>	
 	<target name="compile">
 		<mkdir dir="${classes.dir}" />
 		<javac srcdir="${src.dir}" destdir="${classes.dir}">
@@ -29,6 +30,7 @@
 	</target>
 	<target name="clean-build" depends="clean,jar" />
 	<target name="main" depends="clean,run" />
+	
 	<property name="test.report.dir" value="./tests" />
 	<mkdir dir="${test.report.dir}" />
 	<target name="junit" depends="compile">
@@ -42,10 +44,11 @@
 			<classpath location="${classes.dir}" />
 			<formatter type="plain" />
 			<batchtest todir="${test.report.dir}">
-				<fileset dir="${src.dir}">
+				<fileset dir="${test.dir}">
 					<include name="**/*Test.java" />
 				</fileset>
 			</batchtest>
 		</junit>
 	</target>
+	
 </project>
