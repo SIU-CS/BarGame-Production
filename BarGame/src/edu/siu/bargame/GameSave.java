@@ -24,6 +24,7 @@ public class GameSave extends Inventory implements java.io.Serializable {
 		try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("save1.txt")))) {
 			oos.writeUTF(player.getGender());
 			oos.writeUTF(player.getName());
+			oos.writeUTF(player.getPlayerClass());
 			oos.writeUTF(player.getPlayerDescription());
 			oos.writeInt(player.getGold());
 			oos.writeInt(player.getCurHp());
@@ -49,6 +50,7 @@ public class GameSave extends Inventory implements java.io.Serializable {
 			try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(p))) {
 				player.setGender(ois.readUTF());
 				player.setName(ois.readUTF());
+				player.setPlayerClass(ois.readUTF());
 				player.setPlayerDescription(ois.readUTF());
 				player.setGold(ois.readInt());
 				player.setCurHp(ois.readInt());
@@ -68,7 +70,7 @@ public class GameSave extends Inventory implements java.io.Serializable {
 				ois.close();
 				System.out.println("Game Loaded.");
 				
-			 	MenuUI UInterface = new MenuUI();
+			 	/*MenuUI UInterface = new MenuUI();
 
 			 	Boolean game = true;
 				while (game) {
@@ -124,7 +126,7 @@ public class GameSave extends Inventory implements java.io.Serializable {
 							System.out.println("Thanks for playing! ");
 							break;
 						}	
-					}
+					}*/
 				}
 			}
 		else {

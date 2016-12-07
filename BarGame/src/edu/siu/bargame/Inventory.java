@@ -170,17 +170,22 @@ public class Inventory extends Character {
 				System.out.println("You drink the potion, you're health is now " + player.getCurHp());
 				removeBattleItem(item);
 				break;
-			case "Great Potion":
+			case "great potion":
 				player.setCurHp(player.getCurHp()+25);
 				if (player.getCurHp() > player.getMaxHp()) {
 					player.setCurHp(player.maxHp);
 				}
 				System.out.println(player.getCurHp());
 				break;
-			case "Max Potion":
+			case "elixir":
 				player.setCurHp(player.getMaxHp());
 				System.out.println(player.getCurHp());
 				break;
+			case "food":
+				player.setCurHp(player.getCurHp()+3);
+				if (player.getCurHp() > player.getMaxHp()) {
+					player.setCurHp(player.maxHp);
+				}
 			case "exit":
 				break;
 			default:
@@ -252,6 +257,60 @@ public class Inventory extends Character {
 			player.setDef(player.getDef()+50);
 			break;
 		default:
+		}
+	}
+	protected boolean checkBItems(){
+		int i; 
+		boolean	avail=false;
+		int counter=0;
+		for(i=0; i<battleItems.length-1; i++){
+			if(battleItems[i]==null){
+				counter++;
+			} 
+		}
+		if(counter>0){ 
+		 avail=true;
+		}
+		return avail;
+	}
+	protected boolean checkKey(){
+		int i; 
+		boolean	avail=true;
+		int counter=0;
+		for(i=0; i<keyItems.length-1; i++){
+			if(keyItems[i]==null){
+				counter++;
+			} 
+		}
+		if(counter>0){ 
+		 avail=false;
+		}
+		return avail;
+	}
+	protected boolean checkEquip(){
+		int i;
+		boolean avail=true;
+		int counter=0;
+		for(i=0;i<equipmentItems.length-1;i++){
+			if(equipmentItems[i]==null){
+				counter++;
+			}
+			
+		}
+		if(counter>0){
+			avail=false;
+		}
+		return avail;
+	}
+	protected void CheckitemType(String item){
+		if(item.equalsIgnoreCase("food")|| item.equalsIgnoreCase("potion")|| item.equalsIgnoreCase("elixir")){
+			addBattleItem(item);
+		}
+		if(item.equalsIgnoreCase("gold")|| item.equalsIgnoreCase("jewel")|| item.equalsIgnoreCase("amulet")){
+			addKeyItem(item);
+		}
+		if(item.equalsIgnoreCase("helmet")||item.equalsIgnoreCase("armor")||item.equalsIgnoreCase("cape")||item.equalsIgnoreCase("")){
+			addEquipment(item);
 		}
 	}
 }

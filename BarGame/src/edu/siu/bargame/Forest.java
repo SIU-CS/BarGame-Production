@@ -131,15 +131,8 @@ public class Forest extends Story {
 		int selection = input.nextInt();
 		switch (selection) {
 		case 1:
-			if (searchKeyItems("Ancient Book")) {
-				System.out.println(forestConversations[1]);
-				player.setBookDecipher(0);
-				conversationMenu();
-			}
-			else {
-				System.out.println(forestConversations[0]);
-				conversationMenu();
-			}
+			System.out.println(forestConversations[0]);
+			conversationMenu();	
 			break;
 		case 2:
 			System.out.println(forestConversations[2]);

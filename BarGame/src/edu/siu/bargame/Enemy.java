@@ -1,6 +1,7 @@
 package edu.siu.bargame;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Enemy extends Character {
 	protected int hp;
@@ -8,6 +9,9 @@ public class Enemy extends Character {
 	protected int def;
 	protected int expGiven;
 	private static String typeValue;
+	protected String loot;
+	Random rn = new Random();
+	Scanner kb = new Scanner(System.in);
 	
 	public Enemy(int hp, int str, int def, int expGiven) {
 		this.hp = hp;
@@ -16,6 +20,12 @@ public class Enemy extends Character {
 		this.expGiven = expGiven;
 	}
 	
+	public int genRandom(){
+		int i =rn.nextInt(3);
+		return i;
+		
+	}
+
 	public int getExpGiven() {
 		return expGiven;
 	}
@@ -59,39 +69,39 @@ public class Enemy extends Character {
 		Enemy enemy = null;
 		switch (scale) {
 			case 1:
-				enemy = new Enemy(8, 4, 3, 10);
+				enemy = new Enemy(5, 3, 2, 7);
 				typeValue = "Soldier";
 				break;
 			case 2:
-				enemy = new Enemy(10, 2, 1, 5);
+				enemy = new Enemy(6, 2, 1, 3);
 				typeValue = "Undead";
 				break;
 			case 3:
-				enemy = new Enemy(3, 2, 0, 3);
+				enemy = new Enemy(3, 1, 0, 3);
 				typeValue = "Spider";
 				break;
 			case 4:
-				enemy = new Enemy(6, 3, 3, 6);
+				enemy = new Enemy(4, 3, 1, 6);
 				typeValue = "Bandit";
 				break;
 			case 5:
-				enemy = new Enemy(6, 2, 3, 6);
+				enemy = new Enemy(5, 4, 2, 6);
 				typeValue = "Wanderer";
 				break;
 			case 6:
-				enemy = new Enemy(7, 4, 3, 9);
+				enemy = new Enemy(7, 3, 3, 9);
 				typeValue = "Mercenary";
 				break;
 			case 7:
-				enemy = new Enemy(20, 6, 12, 10);
+				enemy = new Enemy(20, 5, 6, 12);
 				typeValue = "Golem";
 				break;
 			case 8:
-				enemy = new Enemy(18, 9, 7, 10);
+				enemy = new Enemy(18, 8, 1, 10);
 				typeValue = "Wyvern";
 				break;
 			case 9:
-				enemy = new Enemy(15, 10, 4, 11);
+				enemy = new Enemy(15, 3, 0, 11);
 				typeValue = "Sorceror";
 			default:
 				System.out.println("Invalid enemy type entered.");

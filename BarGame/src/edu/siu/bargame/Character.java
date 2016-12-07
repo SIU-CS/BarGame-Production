@@ -14,7 +14,7 @@ public class Character {
 		this.gold = gold;
 	}
 
-
+	protected String playerClass;
 	protected int level = 1;
 	protected int exp = 0;
 	protected int str;
@@ -28,7 +28,6 @@ public class Character {
 	boolean forestVisited = true;
 	boolean townVisited = false;
 	boolean castleVisited = false;
-	int bookDecipher = 1;
 	String currentLocation = "Forest";
 	
 	public void setCurrentLocation(String currentLocation2) {
@@ -63,16 +62,6 @@ public class Character {
 		this.castleVisited = castleVisited;
 	}
 
-
-	public int getBookDecipher() {
-		return bookDecipher;
-	}
-
-	public void setBookDecipher(int bookDecipher) {
-		this.bookDecipher = bookDecipher;
-	}
-
-
 	public static Character player;
 	
 	public Character() {
@@ -88,13 +77,12 @@ public class Character {
 	
 	public void createCharacter() {
 
-		//player = new Character(7, 7, 60); // created at initiation
 		System.out.println("Enter your gender.  M or F.");
 		Scanner sex = new Scanner(System.in);
 		
 		String gender = sex.nextLine();
 		boolean genderSet = false;
-		do{//loop to ensure that inputs are a "m" or "f"
+		do{
 			try{
 				
 				if (gender.equalsIgnoreCase("M")  || gender.equalsIgnoreCase("F")) {//ignores case
@@ -125,8 +113,23 @@ public class Character {
 		Scanner name = new Scanner(System.in);
 		String title = name.next();
 		this.name = title;
+		System.out.println("Please choose a player class: \n"
+				+ " Rogue"
+				+ " Mage"
+				+ " Warrior"
+				+ " Hunter");
+			Scanner scan = new Scanner(System.in);
+			playerClass = scan.nextLine();
 	}
 	
+	public String getPlayerClass() {
+		return playerClass;
+	}
+
+	public void setPlayerClass(String playerClass) {
+		this.playerClass = playerClass;
+	}
+
 	public Character getHero() {
 		return player;
 	}

@@ -5,34 +5,25 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		
-/*		Character player = new Character(4, 4, 5);
+
+		Character player = new Character(7, 7, 14);
 		player.createCharacter();
 		player.setHero(player);
+		System.out.println("");
+		System.out.println(player + "");
 		Inventory inv = new Inventory();
-		inv.setStartItems();
-		player.PrintStats();
-		GameSave.save();
-		GameSave.load();
-		player.PrintStats();*/
 		
-		
-		/*System.out.println("Would you like to load a previously-saved game?  Yes or No");
+		System.out.println("Would you like to load a previously-saved game?  Yes or No");
 		Scanner load = new Scanner (System.in);
 		String loadChoice = load.nextLine();
 		if (loadChoice.equalsIgnoreCase("yes")) {
 			GameSave.load();
-		}*/
-		
-	 	Character player = new Character(2, 2, 2);
-	 	player.createCharacter();
-	 	player.setHero(player);
-	 	System.out.println("");
-	 	System.out.println(player + "");
-	 	Inventory inv = new Inventory();
-	 	inv.setStartItems();
-		System.out.println(Story.story[0]);
-	 	MenuUI UInterface = new MenuUI();
+		}
+		else {
+			inv.setStartItems();
+			System.out.println(Story.story[0]);
+		}
+		MenuUI UInterface = new MenuUI();
 
 	 	Boolean game = true;
 		while (game) {
@@ -76,7 +67,7 @@ public class Main {
 					System.out.println(player.PrintStats());
 					break;
 				case 4:
-					Battle.battle();
+					Battle.battle(inv);
 					break;
 				case 5:
 					System.out.println("Saving Game...");
@@ -87,7 +78,7 @@ public class Main {
 					game = false;
 					System.out.println("Thanks for playing! ");
 					break;
-				}	
 			}
 		}
 	}
+}
