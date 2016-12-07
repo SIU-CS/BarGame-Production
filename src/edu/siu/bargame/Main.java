@@ -1,5 +1,5 @@
 package edu.siu.bargame;
-import java.util.Random;
+
 
 public class Main {
 	
@@ -7,38 +7,40 @@ public class Main {
 
 		
 		
-		System.out.println("hello");
+		
 		
 		
 		//Shop myShop = new Shop();
-		//Character player = new Character(7,10,10);
-	//	player.createCharacter();
-	//	player.setHero(player);
-	//	Inventory inventory = new Inventory();
-	//	inventory.setStartItems();
-	//	player.setGold(500);
-	//	myShop.Shopping(player, inventory);
+		Character player = new Character(7,10,10);
+	player.createCharacter();
+	player.setHero(player);
+		Inventory inventory = new Inventory();
+		inventory.setStartItems();
+		player.setGold(500);
+		//myShop.Shopping(player, inventory);
 		
 		
-		//inventory.printBattleItems();
+		inventory.printBattleItems();
 		
 		
 		
 		
-	//	/Character player1 = new Character(8,11,11);
+		Character player1 = new Character(8,11,11);
 	// * int x= ran.nextInt(2-1+1)+1;
 		
 		
-		//player1.createCharacter();
-	//	player1.setHero(player1);
+		player1.createCharacter();
+		player1.setHero(player1);
+		Inventory inv2 = new Inventory();
+		inv2.setStartItems();
+	    inv2.printBattleItems();
 		//Enemy opponent = Enemy.typeOfEnemy("Mercenary");
 		
-	//	PvPBattle b = new PvPBattle();
-		
-	//	b.PlayerBattle(player,player1);
+		PvPBattle b = new PvPBattle();
+	
+		b.PlayerBattle(player,player1);
 		//Inventory inventory = new Inventory();
-		//inventory.setStartItems();
-	    //inventory.printBattleItems();
+		
 	    //inventory.printEquipment();
 	    //inventory.printKeyItems();
 		

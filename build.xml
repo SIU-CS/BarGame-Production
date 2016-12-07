@@ -1,20 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project default="runjunit" name="Bargame Production">
-	<target name="runjunit" depends="compile">
-		<junit printsummary="on" filtertrace="no"  haltonfailure="no" showoutput="yes">
-			<formatter type="plain" usefile="false" />
-			<test name="edu.siu.test.InventoryTest"/>
-			<test name="edu.siu.test.EnemyTest"/>
-			<test name="edu.siu.test.CharacterTest"/>
-
-			
-			<classpath>
-				<pathelement location="C:\eclipse\plugins\org.junit_4.12.0.v201504281640\junit.jar"/>
-				<pathelement location="staging"/>
-			</classpath>
-		</junit>
+<project name="pacman" basedir="." default="main">
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="main-class" value="edu.siu.pacman.Main" />
+	<target name="clean">
+		<delete dir="${build.dir}" />
 	</target>
 	<target name="compile">
-		<javac includeantruntime="false" srcdir="./src" destdir="staging" classpath="C:\eclipse\plugins\org.junit_4.12.0.v201504281640\junit.jar"/>
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" />
 	</target>
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true" />
+	</target>
+	<target name="clean-build" depends="clean,jar" />
+	<target name="main" depends="clean,run" />
 </project>
