@@ -7,7 +7,7 @@ public class Main {
 
 		
 		
-		
+		System.out.println("hello");
 		
 		
 		//Shop myShop = new Shop();

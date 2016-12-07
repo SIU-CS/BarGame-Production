@@ -133,8 +133,7 @@ public class Battle extends Inventory {
 		int x= ran.nextInt(5-0);
 		return items[x];
 	}
-
-
+//<javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}">
 
 	private static void option2(String enemy) {
 		printBattleItems();
