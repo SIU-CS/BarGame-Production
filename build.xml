@@ -19,6 +19,7 @@
 			<batchtest todir="${test.report.dir}">
 				<fileset dir="${src.dir}">
 					<include name="edu/siu/bargame/EnemyTest.java" />
+					<include name="edu/siu/bargame/CharacterTest.java"/>
 				
 				</fileset>
 			</batchtest>
