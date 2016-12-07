@@ -1,4 +1,4 @@
-package edu.siu.test;
+package edu.siu.bargame;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import edu.siu.bargame.Enemy;
 
 public class EnemyTest {
 

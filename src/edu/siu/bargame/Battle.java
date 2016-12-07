@@ -4,17 +4,19 @@ import java.util.Scanner;
 public class Battle extends Inventory {
 
 	public static String Target;
-	private String items[]= {"gold","jewel","food","potion","gun"};
+	private String items[]= {"gold","jewel","food","potion"};
 	
-	protected static void battle(String enemy, Inventory x) {
+	protected static void battle( Inventory x) {
 		//Enemy opponent = new Enemy(7,4,3,9);
-		Enemy opponent = Enemy.typeOfEnemy(enemy);//new Enemy(7, 4, 3, 9);
+		Enemy opponent = Enemy.typeOfEnemy();//new Enemy(7, 4, 3, 9);
 		levelScale(player,opponent);
+		player.setBatCounter(player.getBatCounter()+1);
 		System.out.println("A " + opponent.getTypeOfEnemy() + " challenges you!");
 		System.out.println(opponent.getTypeOfEnemy() +" "+" HP: "+ opponent.getCurHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
 		System.out.println("");
 		
 		int battleChoice;
+		int opponentChoice = (int)(Math.random() * ((5) + 1));
 		Scanner option = new Scanner(System.in);
 		
 		
@@ -40,13 +42,25 @@ public class Battle extends Inventory {
 			    }
 			    
 			    else{
+			    	if(opponentChoice<=3){
 			    	System.out.println(opponent.getTypeOfEnemy() + " attacks!");
 			    	attack(opponent, "player");
-			    }
+			    	}
+			    	else if (opponentChoice == 4 && opponent.getCurHp() != opponent.getMaxHp()){
+			    		System.out.println(opponent.getTypeOfEnemy() + " Uses a potion!");
+			    		opponent.setCurHp(opponent.getCurHp() + 5);
+			    		System.out.println("Opponent's Current health " + opponent.getCurHp());
+			    	
+			    	}
+			    	else if (opponentChoice == 5 && !opponent.getTypeOfEnemy().equals("Boss")){
+			    		System.out.println(opponent.getTypeOfEnemy() +" ran with fear!");
+			    		break;
+			    	}
 			    
+					}
 				}
 			
-			    else {
+			    else{
 			    System.out.println(opponent.getTypeOfEnemy() + " attacks!");
 			    attack(opponent, "player");
 			    attack(opponent,"npc");
@@ -55,14 +69,16 @@ public class Battle extends Inventory {
 			
 			if(player.getCurHp() <= 0){
 				System.out.println( "You lose ");
-				break;
-				
+				System.out.println("Game Over");
+				System.exit(0);
+				player.setGold(0);
 			}
+		
+			
+		player.setExp(player.getExp() + opponent.getExpGiven());
+		player.levelUp();
+				
 		}
-			
-				
-				
-			
 			
 		else if (battleChoice == 3) {
 			Random random = new Random();
@@ -79,14 +95,20 @@ public class Battle extends Inventory {
 		}
 		
 		else if (battleChoice == 2) {
-			option2(enemy);
+			option2(opponent);
 		}
 	}
+		player.levelUpCheck();
+		player.setExp(player.getExp()+opponent.getExpGiven());
+		System.out.println("Exp gained: "+opponent.getExpGiven());
+		int exptill=(player.getExpForLevelUp()-player.getExp());
+		System.out.println("Exp till level up: "+exptill);
 		Battleloot(x);
 		
-		System.out.println("Game over");
+	
 	
 	}
+	
 	protected static void Battleloot(Inventory x){
 		System.out.println("Would you like to search your opponent for possible items?");
 		Scanner kb = new Scanner(System.in);
@@ -101,10 +123,17 @@ public class Battle extends Inventory {
 				System.out.println("Would you like to take this item?");
 				String opt2 = kb.nextLine();
 				if(opt2.equalsIgnoreCase("yes")){
-						x.CheckitemType(ranIt);
-						set2=false;
+						if(ranIt.equalsIgnoreCase("Gold")){
+							player.setGold(player.getGold()+25);
+							set2=false;
+						}
+						else 
+							x.CheckitemType(ranIt);
+							System.out.println("back to exploring");
+							set2=false;
+						
 				}
-				if(opt2.equalsIgnoreCase("no")){
+				else if(opt2.equalsIgnoreCase("no")){
 					set2=false;
 					
 				}
@@ -112,9 +141,10 @@ public class Battle extends Inventory {
 					System.out.println("Please enter a valid response");
 				}
 				}
+				set=false;
 				
 			}
-			if(opt.equalsIgnoreCase("no")){
+			else if(opt.equalsIgnoreCase("no")){
 				System.out.println("back to exploring area");
 				set=false;
 			}
@@ -133,15 +163,32 @@ public class Battle extends Inventory {
 		int x= ran.nextInt(5-0);
 		return items[x];
 	}
-//<javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}">
 
-	private static void option2(String enemy) {
+	private static void option2(Enemy enemy) {
 		printBattleItems();
 		System.out.println("Enter the name of the item you want to use.  Enter exit to return to the previous screen.");//method to use item
 		Scanner battleItem = new Scanner(System.in);
 		String item = battleItem.next();
 		useItem(item);
-		//battle(enemy);
+		
+	}
+	public static void typeAttack(){
+		String typeAttack = player.getplayerClass();
+		switch(typeAttack){
+			case "Rogue":
+				System.out.println( player.getName() +" uses Backstab");
+				break;
+			case "Wizard":
+				System.out.println( player.getName() +" uses Pyroblast");
+				break;
+			case "Warrior":
+				System.out.println( player.getName() +" uses Brawl");
+				break;
+			case "Hunter":
+				System.out.println( player.getName() +" uses Poison Arrow");
+				break;
+				
+		}
 	}
 	
 	
@@ -151,8 +198,8 @@ public class Battle extends Inventory {
 		
 		Target = type;
 		if (Target == "npc"){
-
 			System.out.println("Your attack: " + player.getStr() + " " + ((Enemy) target).getTypeOfEnemy() + " Defence: " + target.getDef());
+			typeAttack(); 
 			System.out.println("Total damage: " + target.HealthDiff(target, player)) ;
 			target.setCurHp(target.getCurHp() - target.HealthDiff(target, player) );
 			System.out.println("Opponent's health is " + target.getCurHp());
@@ -162,7 +209,7 @@ public class Battle extends Inventory {
 		else {
 				
 			System.out.println(  "Enemy attack: " + target.getStr() + " " +  " Your Defence: " + player.getDef());
-			System.out.println("Total damage: " + player.HealthDiff(player, target));	
+			System.out.println("Total damage: " + player.HealthDiff(target, player));	
 			player.setCurHp(player.getCurHp() - player.HealthDiff(player, target));
 			System.out.println("You're current health is "+ player.getCurHp());
 			}
@@ -183,5 +230,77 @@ public class Battle extends Inventory {
 		y.setMaxHp(y.getMaxHp()+attC);
 		
 	}
+	protected static void bossBattle(Inventory x) {
+		Enemy opponent = Enemy.boss();
+		
+		System.out.println("A " + opponent.getTypeOfEnemy() + " Stands Proud!");
+		System.out.println(opponent.getTypeOfEnemy() +" "+" HP: "+ opponent.getCurHp() + " Attack: "+ opponent.getStr() + " Defense: "+ opponent.getDef());
+		System.out.println("");
+		
+		int battleChoice;
+		Scanner option = new Scanner(System.in);
+		
+		
+		while (player.getCurHp() >= 0 || opponent.getCurHp() >= 0){
+		
+			
+			System.out.println("\nPress 1 to attack.\tPress 2 to use an item.\n");
+			battleChoice = option.nextInt();
+			
+		if (battleChoice == 1) {
+			System.out.println("-------------------------fight----------------------------\n");
+
+			if (player.getStr() > opponent.getStr()) {
+				System.out.println("You attack first ");
+			
+			    attack(opponent, "npc");
+			    System.out.println(" ");
+			    
+			    if (opponent.getCurHp() <= 0 ){
+			    	break;
+			    }
+			    
+			    else{
+			    	System.out.println(opponent.getTypeOfEnemy() + " attacks!");
+			    	attack(opponent, "player");
+			    }
+			    
+				}
+			
+			    else {
+			    System.out.println(opponent.getTypeOfEnemy() + " attacks!");
+			    attack(opponent, "player");
+			    attack(opponent,"npc");
+			    }
+			
+			
+			if(player.getCurHp() <= 0){
+				System.out.println( "You lose ");
+				System.out.println("Game Over");
+				System.exit(0);
+				
+			}
+			//drops, gold,
+			player.levelUp();
+		}			
+				
+		else if (battleChoice == 2) {
+			option2(opponent);
+		}
+		
 	}
+		if(opponent.getCurHp()<=0){
+			System.out.println(opponent.getTypeOfEnemy()+" has been defeated and dropped gold");
+			player.setGold(player.getGold()+100);
+			player.levelUpCheck();
+			player.setExp(player.getExp()+opponent.getExpGiven());
+			System.out.println("Exp gained: "+opponent.getExpGiven());
+			int exptill=(player.getExpForLevelUp()-player.getExp());
+			System.out.println("Exp till level up: "+exptill);
+			System.out.println("100 gold added, current gold: "+player.getGold());
+		}
+	}
+	
+	
+}
 
