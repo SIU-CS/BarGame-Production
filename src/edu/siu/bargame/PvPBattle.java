@@ -1,3 +1,4 @@
+
 package edu.siu.bargame;
 import java.util.Scanner;
 import java.util.Random;
