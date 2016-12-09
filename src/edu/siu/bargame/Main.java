@@ -1,40 +1,84 @@
 package edu.siu.bargame;
-import java.util.Random;
+
+
+import java.util.Scanner;
 
 public class Main {
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	/*	Random ran= new Random();
-		for(int i=0; i<+15; i++){
-		int x= ran.nextInt(6-0);
-		System.out.println(x);
-		}*/
-	//		Character player2
-		
-		Character player = new Character(7,10,10);
-		Character player1 = new Character(8,11,11);
-	// * int x= ran.nextInt(2-1+1)+1;
+
+	public static void main(String[] args) throws Exception {
+
+	/*	Character player = new Character(100, 100, 100);
 		player.createCharacter();
 		player.setHero(player);
+		player.setLevel(60);
+		System.out.println("");
+		System.out.println(player + "");
+		Inventory inv = new Inventory();
 		
-		player1.createCharacter();
-		player1.setHero(player1);
-		//Enemy opponent = Enemy.typeOfEnemy("Mercenary");
-		
-		PvPBattle b = new PvPBattle();
-		
-		b.PlayerBattle(player,player1);
-		//Inventory inventory = new Inventory();
-		//inventory.setStartItems();
-	    //inventory.printBattleItems();
-	    //inventory.printEquipment();
-	    //inventory.printKeyItems();
-		
-		//Battle.battle("Undead");
-		//Battle.battle("Mercenary");
-		//Battle.battle("Boss");
-		//Battle.attack(opponent);
+		System.out.println("Would you like to load a previously-saved game?  Yes or No");
+		Scanner load = new Scanner (System.in);
+		String loadChoice = load.nextLine();
+		if (loadChoice.equalsIgnoreCase("yes")) {
+			GameSave.load();
+		}
+		else {
+			inv.setStartItems();
+			System.out.println(Story.story[0]);
+		}
+		MenuUI UInterface = new MenuUI();
+	 	Boolean game = true;
+		while (game) {
+			int temp = 0;
+	 		UInterface.Interface();
+	 		temp = UInterface.getChoice();
+			switch (temp) {
+				case 1:
+					System.out.println("Where would you like to go?\n\nSalinger\n");
+					if (player.getTownVisited()) {
+						System.out.println("Ferop\n");
+					}
+					if (player.getCastleVisited()) {
+						System.out.println("Castle\n\n");
+					}
+					Scanner locale = new Scanner(System.in);
+					String area = locale.next();
+					if (area.equalsIgnoreCase("salinger")) {
+						Forest forest = new Forest(player,inv);
+						forest.menu(player,inv);
+					}
+					else if (area.equalsIgnoreCase("ferop")) {
+						Town town = new Town(player,inv);
+						town.menu(player,inv);
+					}
+					else if (area.equalsIgnoreCase("castle")) {
+						Castle castle = new Castle(player,inv);
+						castle.menu(player,inv);
+					}
+					else {
+						System.out.println("Invalid location entered");
+					}
+					break;
+				case 2:
+					inv.printBattleItems();
+				    inv.printEquipment();
+				    inv.printKeyItems();
+				    break;
+				case 3:
+					System.out.println(player.PrintStats());
+					break;
+				case 4:
+					Battle.battle(inv);
+					break;
+				case 5:
+					System.out.println("Saving Game...");
+					GameSave.save();
+					System.out.println("Game Saved.");
+					break;
+				case 6:
+					game = false;
+					System.out.println("Thanks for playing! ");
+					break;
+			}
+		}*/
 	}
-
 }
