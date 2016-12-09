@@ -12,53 +12,71 @@ package edu.siu.bargame;
  */
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class GameSave extends Character implements java.io.Serializable { //Try moving implementation of Serializable, including methods, to CharacterClasses super class, and/or try implementing interface in character superclass if issues are met
+public class GameSave extends Inventory implements java.io.Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4232457763066697964L;
+
 	
-	public static void save(Serializable data, String fileName) throws Exception {
-		try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
-			oos.writeObject(data);
+	 public static void save() throws Exception {
+		 Path p = Paths.get("save1.txt");
+		 Files.deleteIfExists(p);
+		try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("save1.txt")))) {
+			//oos.writeObject(data);
+			oos.writeInt(player.getGold());
+			oos.writeUTF(player.getGender());
+			oos.writeUTF(player.getName());
+			oos.writeUTF(player.getPlayerDescription());
+			oos.writeInt(player.getCurHp());
+			oos.writeInt(player.getDef());
+			oos.writeInt(player.getExp());
+			oos.writeInt(player.getExpForLevelUp());
+			oos.writeInt(player.getLevel());
+			oos.writeInt(player.getMaxHp());
+			oos.writeInt(player.getStr());
+			oos.writeBoolean(player.getForestVisited());
+			oos.writeBoolean(player.getTownVisited());
+			oos.writeBoolean(player.getCastleVisited());
+			oos.writeObject(Inventory.battleItems);
+			oos.writeObject(Inventory.equipmentItems);
+			oos.writeObject(Inventory.keyItems);
+			oos.close();
+			System.out.println("Game Saved.");
 		}
 	}
 	
-	public static Object load(String fileName) throws Exception {
-		try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
-			return ois.readObject();
+	public static void load() throws Exception {
+		 Path p = Paths.get("save1.txt");
+		if(Files.exists(p)){
+		try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(p))) {
+			player.setGold(ois.readInt());
+			player.setGender(ois.readUTF());
+			player.setName(ois.readUTF());
+			player.setPlayerDescription(ois.readUTF());
+			player.setCurHp(ois.readInt());
+			player.setDef(ois.readInt());
+			player.setExp(ois.readInt());
+			player.setExpForLevelUp(ois.readInt());
+			player.setLevel(ois.readInt());
+			player.setMaxHp(ois.readInt());
+			player.setStr(ois.readInt());
+			player.setForestVisited(ois.readBoolean());
+			player.setTownVisited(ois.readBoolean());
+			player.setCastleVisited(ois.readBoolean());			
+			Inventory.setBattleItems((String[]) ois.readObject());
+			Inventory.setEquipment((String[]) ois.readObject());
+			Inventory.setKeyItems((String[]) ois.readObject());
+			player.setCurrentLocation("Forest");
+			ois.close();
+			System.out.println("Game Loaded.");
 		}
 	}
-	//Lots of comments!
-	
-/*	FileOutputStream fop = null;
-	File file;
-	
-	try {
-		file = new File("c:/newfile.txt");
-		fop = new FileOutputStream(file);
-	}
-	
-	if (!file.exists()) {
-		file.createNewFile();
-	}
-	byte[] contentInBytes = level.getBytes();
-	}
-	public void saveToXML(String xml) {
-		Document dom;
-		Element e = null;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = (Document) db.newDocument();
-			Element rootElement = (Element) ((org.w3c.dom.Document) dom).createElement("myparameters");
-			e = (Element) ((org.w3c.dom.Document) dom).createElement("brightness");
-			((Node) e).appendChild(((org.w3c.dom.Document) dom).createTextNode("brightness"));
-			((Node) rootElement).appendChild((Node) e);
+		else{
+			System.out.println("no save data found.");
 		}
-	}*/
-	
+	}
 	
 }

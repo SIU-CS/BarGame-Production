@@ -1,22 +1,81 @@
 package edu.siu.bargame;
 
-import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Character {
+	private static int batCounter;
+	public static int getBatCounter() {
+		return batCounter;
+	}
+
+	public static void setBatCounter(int batCounter) {
+		Character.batCounter = batCounter;
+	}
+	
+
+	protected int Gold;
 	protected int level = 1;
 	protected int exp = 0;
 	protected int str;
 	protected int def;
 	protected int maxHp;
-	protected int curHp = maxHp;
-	protected String gender;
-	protected String playerDescription;
-	protected String name;
+	protected int curHp;
+	protected String gender= "";
+	protected String playerDescription="";
+	protected String name="";
 	protected int expForLevelUp = 80;
-	public static Character player;
+	protected String playerClass;
 	
-	public Character() {
+	boolean forestVisited=true;
+	boolean townVisited=false;
+	boolean castleVisited=false;
+	int bookDecipher = 1;
+	String currentLocation="Forest";
+	
+	public void setCurrentLocation(String currentLocation2) {
+		currentLocation = currentLocation2;	
+	}
+	
+	public String getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public boolean getForestVisited() {
+		return forestVisited;
+	}
+
+	public void setForestVisited(boolean forestVisited) {
+		this.forestVisited = forestVisited;
+	}
+
+	public boolean getTownVisited() {
+		return townVisited;
+	}
+
+	public void setTownVisited(boolean townVisited) {
+		this.townVisited = townVisited;
+	}
+
+	public boolean getCastleVisited() {
+		return castleVisited;
+	}
+
+	public void setCastleVisited(boolean castleVisited) {
+		this.castleVisited = castleVisited;
+	}
+
+
+	public int getBookDecipher() {
+		return bookDecipher;
+	}
+
+	public void setBookDecipher(int bookDecipher) {
+		this.bookDecipher = bookDecipher;
+	}
+	
+	public static Character player;
+	public Character(){
 		
 	}
 	
@@ -65,14 +124,29 @@ public class Character {
 		Scanner name = new Scanner(System.in);
 		String title = name.next();
 		this.name = title;
+		System.out.println("Please choose a player class: \n"
+				+ " Rogue"
+				+ " Mage"
+				+ " Warrior"
+				+ " Hunter");
+			Scanner scan = new Scanner(System.in);
+			playerClass = scan.nextLine();
 	}
 	
 	public Character getHero() {
 		return player;
 	}
+	
+	public static void setHero(Character hero) {
+		player = hero;
+	}
+	
+	public int getGold() {
+		return Gold;
+	}
 
-	public void setHero(Character hero) {
-		this.player = hero;
+	public void setGold(int gold) {
+		Gold = gold;
 	}
 
 	public int getLevel() {
@@ -136,25 +210,41 @@ public class Character {
 	public void setExpForLevelUp(int expForLevelUp) {
 		this.expForLevelUp = expForLevelUp;
 	}
+	public String getplayerClass(){
+		return playerClass;
+	}
+	public void levelUpCheck(){
+		if(exp>=expForLevelUp){
+			levelUp();
+		}
+	}
 	
 	public void levelUp() {
-		level++;
-		if (exp > expForLevelUp) {
-			exp -= expForLevelUp;
-		}
-		
-		else {
-			exp = 0;
-		}
+		Random random = new Random();
+		if(exp>=expForLevelUp){
+			level++;
+			str += random.nextInt(4)+1;
+			def	+= random.nextInt(3)+1;
+			maxHp += random.nextInt(6)+1;
+			if(exp> expForLevelUp){
+				exp-=expForLevelUp;
+				
+			}
+			else{
+				exp =0;
+			}
 			expForLevelUp *= level;
+		}
+			
+		
 		
 	}
 	
 	public int HealthDiff( Character player, Character opponent){
-		int healthDiff;
+		int healthDiff=1;
 		
-		if((healthDiff = opponent.getStr() - player.getDef()) < 0){
-			return healthDiff = 1;
+		if((opponent.getStr() - player.getDef()) < 0){
+			return healthDiff;
 		}
 		else 
 			return healthDiff = opponent.getStr()- player.getDef();
