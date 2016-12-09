@@ -26,6 +26,7 @@ public class Main {
 			System.out.println(Story.story[0]);
 		}
 		MenuUI UInterface = new MenuUI();
+<<<<<<< HEAD
 	 	Boolean game = true;
 		while (game) {
 			int temp = 0;
@@ -80,5 +81,64 @@ public class Main {
 					break;
 			}
 		}*/
+=======
+
+	 	Boolean game = true;
+		while (game) {
+			int temp = 0;
+	 		UInterface.Interface();
+	 		temp = UInterface.getChoice();
+
+			switch (temp) {
+				case 1:
+					System.out.println("Where would you like to go?\n\nSalinger\n");
+					if (player.getTownVisited()) {
+						System.out.println("Ferop\n");
+					}
+					if (player.getCastleVisited()) {
+						System.out.println("Castle\n\n");
+					}
+					Scanner locale = new Scanner(System.in);
+					String area = locale.next();
+					if (area.equalsIgnoreCase("salinger")) {
+						Forest forest = new Forest(player,inv);
+						forest.menu(player,inv);
+					}
+					else if (area.equalsIgnoreCase("ferop")) {
+						Town town = new Town(player,inv);
+						town.menu(player,inv);
+					}
+					else if (area.equalsIgnoreCase("castle")) {
+						Castle castle = new Castle(player,inv);
+						castle.menu(player,inv);
+					}
+					else {
+						System.out.println("Invalid location entered");
+					}
+					break;
+				case 2:
+					inv.printBattleItems();
+				    inv.printEquipment();
+				    inv.printKeyItems();
+				    break;
+				case 3:
+					System.out.println(player.PrintStats());
+					break;
+				case 4:
+					Battle.battle(inv);
+					break;
+				case 5:
+					System.out.println("Saving Game...");
+					GameSave.save();
+					System.out.println("Game Saved.");
+					break;
+				case 6:
+					game = false;
+					System.out.println("Thanks for playing! ");
+					break;
+			}
+		}
+	}*/
+>>>>>>> refs/remotes/origin/lucas-work2
 	}
 }
