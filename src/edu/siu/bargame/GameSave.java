@@ -79,4 +79,8 @@ public class GameSave extends Inventory implements java.io.Serializable {
 		}
 	}
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/lucas-work2

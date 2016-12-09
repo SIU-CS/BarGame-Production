@@ -4,6 +4,11 @@ import java.util.Scanner;
 public class Enemy extends Character {
 	
 	
+<<<<<<< HEAD
+=======
+
+	
+>>>>>>> refs/remotes/origin/lucas-work2
 	protected int hp;
 	protected int strength;
 	protected int defense;
@@ -151,4 +156,8 @@ public class Enemy extends Character {
 	}
 	
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/lucas-work2
