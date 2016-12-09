@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		Character player = new Character(100, 100, 100);
+	/*	Character player = new Character(100, 100, 100);
 		player.createCharacter();
 		player.setHero(player);
 		player.setLevel(60);
@@ -79,7 +79,6 @@ public class Main {
 					System.out.println("Thanks for playing! ");
 					break;
 			}
-		}
-	}
+		}*/
 	}
 }
